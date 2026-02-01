@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>EMPEROR CONSOLE | GOD MODE</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
@@ -25,9 +25,9 @@
       color: var(--hacker-green);
       font-family: 'Share Tech Mono', monospace;
       height: 100vh;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     /* ========== BACKGROUND FX ========== */
@@ -40,64 +40,87 @@
     }
 
     /* ========== UI STRUCTURE ========== */
-    #mainInterface { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+    #mainInterface { 
+      height: 100%; 
+      display: flex; 
+      flex-direction: column;
+    }
 
     header {
       border-bottom: 2px solid var(--hacker-green);
-      padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
-      background: rgba(0, 20, 0, 0.9); box-shadow: 0 0 20px var(--hacker-green);
+      padding: 0.8rem 1rem; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center;
+      background: rgba(0, 20, 0, 0.95); 
+      box-shadow: 0 0 20px var(--hacker-green);
+      z-index: 100;
     }
 
-    h1 { font-family: 'Orbitron', sans-serif; letter-spacing: 3px; text-shadow: 0 0 10px var(--hacker-green); margin: 0; font-size: 1.5rem; }
+    h1 { 
+      font-family: 'Orbitron', sans-serif; 
+      letter-spacing: 1px; 
+      text-shadow: 0 0 10px var(--hacker-green); 
+      margin: 0; 
+      font-size: 1.2rem; 
+    }
 
+    .user-info { font-size: 0.7rem; text-align: right; }
+
+    /* ========== RESPONSIVE DASHBOARD ========== */
     .dashboard {
-      display: grid; grid-template-columns: 400px 1fr 300px;
-      gap: 1rem; padding: 1rem; height: 100%; overflow: hidden;
+      flex: 1;
+      display: grid; 
+      grid-template-columns: 400px 1fr 300px;
+      gap: 1rem; 
+      padding: 1rem; 
+      overflow: hidden;
     }
 
     .panel {
       border: 1px solid var(--hacker-green);
       background: rgba(0, 10, 0, 0.8);
-      padding: 1rem; display: flex; flex-direction: column;
+      padding: 0.8rem; 
+      display: flex; 
+      flex-direction: column;
       position: relative;
+      min-height: 0; /* Important for scroll */
     }
     .panel-title {
-      background: var(--hacker-green); color: #000; padding: 2px 10px;
+      background: var(--hacker-green); color: #000; padding: 2px 8px;
       font-weight: bold; margin-bottom: 0.5rem; display: inline-block; width: fit-content;
+      font-size: 0.8rem;
     }
 
-    /* ========== CHAT ROOM (GOD MODE STYLES) ========== */
+    /* ========== CHAT ROOM ========== */
     #chatWindow {
-      flex-grow: 1; overflow-y: auto; font-size: 0.9rem; 
+      flex-grow: 1; overflow-y: auto; font-size: 0.85rem; 
       border-bottom: 1px solid #333; margin-bottom: 10px; padding-right: 5px;
       display: flex; flex-direction: column; gap: 8px;
+      scrollbar-width: thin; scrollbar-color: var(--hacker-green) #000;
     }
     
     .chat-msg { 
-      padding: 5px; border-left: 2px solid var(--hacker-green); 
+      padding: 6px; border-left: 2px solid var(--hacker-green); 
       background: var(--msg-bg); word-wrap: break-word; position: relative;
     }
-    .chat-msg:hover .delete-btn { display: inline-block; } /* Show delete on hover */
-
-    .chat-user { color: var(--cyan); font-weight: bold; font-size: 0.8rem; }
-    .chat-user.admin { color: var(--gold); text-shadow: 0 0 5px var(--gold); } /* GOLD NAME */
     
-    .chat-text { color: #fff; }
-    .chat-text.system { color: var(--alert-red); font-weight: bold; text-transform: uppercase; } /* SYSTEM MSG */
-    
-    .chat-time { float: right; font-size: 0.7rem; color: #666; }
+    .chat-user { color: var(--cyan); font-weight: bold; font-size: 0.75rem; }
+    .chat-user.admin { color: var(--gold); text-shadow: 0 0 5px var(--gold); }
+    .chat-text { color: #fff; line-height: 1.3; }
+    .chat-text.system { color: var(--alert-red); font-weight: bold; text-transform: uppercase; }
+    .chat-time { float: right; font-size: 0.6rem; color: #888; margin-left: 5px; }
 
-    /* DELETE BUTTON */
     .delete-btn {
       float: right; color: var(--alert-red); cursor: pointer; margin-left: 10px;
-      font-weight: bold; display: none; /* Hidden by default */
+      font-weight: bold; font-size: 0.8rem;
     }
-    .delete-btn:hover { background: var(--alert-red); color: #000; }
     
-    .chat-input-area { display: flex; gap: 10px; }
+    .chat-input-area { display: flex; gap: 5px; margin-top: auto; }
     #chatInput {
       flex-grow: 1; background: #000; border: 1px solid var(--hacker-green);
-      color: var(--hacker-green); font-family: 'Share Tech Mono'; padding: 8px;
+      color: var(--hacker-green); font-family: 'Share Tech Mono'; padding: 10px;
+      font-size: 16px; /* Prevents zoom on mobile */
     }
     #sendBtn {
       background: var(--hacker-green); color: #000; border: none; padding: 0 15px;
@@ -106,42 +129,63 @@
 
     /* ADMIN CONTROLS */
     #adminPanel {
-      margin-bottom: 10px; display: none; /* Hidden for non-admins */
+      margin-bottom: 10px; display: none; 
       border: 1px solid var(--alert-red); padding: 5px; background: rgba(50, 0, 0, 0.3);
     }
     .admin-btn {
       background: transparent; border: 1px solid var(--alert-red); color: var(--alert-red);
-      font-size: 0.7rem; padding: 2px 8px; cursor: pointer; margin-right: 5px;
+      font-size: 0.6rem; padding: 4px 8px; cursor: pointer; margin-right: 5px; margin-bottom: 5px;
     }
-    .admin-btn:hover { background: var(--alert-red); color: #000; }
 
-    /* ========== CENTER LINKS ========== */
+    /* ========== LINKS ========== */
     .link-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem; overflow-y: auto; padding: 1rem;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem; overflow-y: auto; padding: 0.5rem;
     }
     .holo-card {
       border: 1px solid var(--hacker-green); background: rgba(0, 30, 0, 0.6);
-      padding: 1.5rem; text-decoration: none; color: var(--hacker-green);
-      transition: 0.2s; position: relative; clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+      padding: 1rem; text-decoration: none; color: var(--hacker-green);
+      transition: 0.2s; position: relative; display: block;
     }
-    .holo-card:hover { background: rgba(0, 255, 0, 0.1); box-shadow: 0 0 15px var(--hacker-green); transform: scale(1.02); }
+    .holo-card h3 { font-size: 0.9rem; margin-bottom: 5px; font-family:'Orbitron'; }
+    .holo-card p { font-size: 0.7rem; color: #8f8; }
 
-    /* ========== RIGHT VITALS ========== */
-    #networkCanvas { width: 100%; height: 150px; border: 1px solid #333; margin-bottom: 1rem; }
-    .vital-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.8rem; }
-    .bar-container { width: 100%; height: 5px; background: #333; margin-bottom: 15px; }
+    /* ========== VITALS ========== */
+    #networkCanvas { width: 100%; height: 100px; border: 1px solid #333; margin-bottom: 1rem; }
+    .vital-row { display: flex; justify-content: space-between; margin-bottom: 2px; font-size: 0.7rem; }
+    .bar-container { width: 100%; height: 4px; background: #333; margin-bottom: 8px; }
     .bar-fill { height: 100%; background: var(--hacker-green); width: 0%; transition: width 0.5s; }
 
     .abort-btn {
       background: #000; border: 1px solid var(--alert-red); color: var(--alert-red);
-      padding: 0.5rem 1rem; cursor: pointer; font-family: 'Share Tech Mono'; transition: 0.3s;
+      padding: 0.3rem 0.8rem; cursor: pointer; font-family: 'Share Tech Mono'; font-size: 0.7rem;
     }
-    .abort-btn:hover { background: var(--alert-red); color: #000; box-shadow: 0 0 20px var(--alert-red); }
 
-    /* MOBILE */
+    /* ========== MOBILE BREAKPOINTS ========== */
     @media (max-width: 900px) {
-      .dashboard { grid-template-columns: 1fr; grid-template-rows: 500px 1fr auto; }
+      body { height: 100vh; /* Fallback */ height: 100dvh; /* Dynamic viewport */ }
+      
+      .dashboard { 
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+        gap: 0.5rem;
+        overflow-y: auto;
+      }
+
+      /* Chat takes priority */
+      .panel:nth-child(1) { order: 1; height: 50%; min-height: 300px; }
+      
+      /* Links second */
+      .panel:nth-child(2) { order: 2; height: auto; min-height: 200px; }
+      
+      /* Vitals last */
+      .panel:nth-child(3) { order: 3; height: auto; }
+
+      h1 { font-size: 1rem; }
+      .user-info { display: none; } /* Hide user info on tiny screens */
+      
+      #chatInput { font-size: 16px; } /* iOS fix */
     }
   </style>
 </head>
@@ -152,9 +196,9 @@
 
   <div id="mainInterface">
     <header>
-      <h1>EMPEROR<span style="color:#fff">_OS</span></h1>
-      <div style="font-size:0.8rem;">USER: <span id="currentUser" style="color:var(--cyan)">DETECTING...</span></div>
-      <button class="abort-btn" id="logoutBtn">LOGOUT</button>
+      <h1>EMPEROR_OS</h1>
+      <div class="user-info">USER: <span id="currentUser" style="color:var(--cyan)">...</span></div>
+      <button class="abort-btn" id="logoutBtn">EXIT</button>
     </header>
 
     <div class="dashboard">
@@ -163,31 +207,31 @@
         <div class="panel-title">SQUADRON_COMMS</div>
         
         <div id="adminPanel">
-          <span style="color:var(--alert-red); font-weight:bold; font-size:0.8rem;">[ADMIN TOOLS]</span>
-          <button class="admin-btn" id="nukeBtn">NUKE CHAT</button>
-          <button class="admin-btn" id="sysMsgBtn">BROADCAST ALERT</button>
+          <span style="color:var(--alert-red); font-weight:bold; font-size:0.7rem;">[ADMIN]</span>
+          <button class="admin-btn" id="nukeBtn">NUKE</button>
+          <button class="admin-btn" id="sysMsgBtn">ALERT</button>
         </div>
 
         <div id="chatWindow">
-          <div style="text-align:center; color:#666; margin-top:50px;">Creating Secure Channel...</div>
+          <div style="text-align:center; color:#666; margin-top:20px;">Connecting...</div>
         </div>
         
         <div class="chat-input-area">
-          <input type="text" id="chatInput" placeholder="Enter encrypted message..." autocomplete="off">
-          <button id="sendBtn">SEND</button>
+          <input type="text" id="chatInput" placeholder="Message..." autocomplete="off">
+          <button id="sendBtn">></button>
         </div>
       </div>
 
       <div class="panel">
-        <div class="panel-title">SECURE_DATA_NODES</div>
+        <div class="panel-title">SECURE_NODES</div>
         <div class="link-grid" id="linksContainer">
           </div>
       </div>
 
       <div class="panel">
-        <div class="panel-title">NETWORK_TRAFFIC</div>
+        <div class="panel-title">SYSTEM_STATUS</div>
         <canvas id="networkCanvas"></canvas>
-        <div class="vital-row"><span>CPU0</span><span id="cpu0Val">12%</span></div>
+        <div class="vital-row"><span>CPU</span><span id="cpu0Val">12%</span></div>
         <div class="bar-container"><div class="bar-fill" id="cpu0Bar"></div></div>
         <div class="vital-row"><span>RAM</span><span id="ramVal">45%</span></div>
         <div class="bar-container"><div class="bar-fill" id="ramBar"></div></div>
@@ -201,7 +245,6 @@
     import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
     import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, serverTimestamp, writeBatch } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-    // 1. FIREBASE CONFIG
     const firebaseConfig = {
       apiKey: "AIzaSyA2W2IcHrs0WasQuBk2h4nqui3z7_P6OmU",
       authDomain: "bhavishya-auth.firebaseapp.com",
@@ -216,28 +259,28 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // ==========================================
-    // ⚠️ SET YOUR ADMIN EMAIL HERE ⚠️
-    // ==========================================
-    const ADMIN_EMAIL = "bhavishyaparjapatii@gmail.com"; // <--- CHANGE THIS TO YOUR EXACT EMAIL
-    // ==========================================
+    // ⚠️ ADMIN EMAIL (Must be lowercase) ⚠️
+    const ADMIN_EMAIL = "bhavishyaparjapatii@gmail.com"; 
 
     let userEmail = "Unknown";
     let isAdmin = false;
 
-    // 2. AUTH & INIT
+    // AUTH CHECK
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         userEmail = user.email;
-        isAdmin = (user.email === ADMIN_EMAIL); // Check if YOU are the user
+        isAdmin = (user.email === ADMIN_EMAIL);
         
-        document.getElementById('currentUser').innerText = userEmail.toUpperCase();
-        if(isAdmin) document.getElementById('currentUser').style.color = "var(--gold)";
+        document.getElementById('currentUser').innerText = userEmail.split('@')[0].toUpperCase();
+        
+        if(isAdmin) {
+          document.getElementById('currentUser').style.color = "var(--gold)";
+          document.getElementById('adminPanel').style.display = 'block';
+          loadSecureLinks(); 
+        } else {
+          document.getElementById('linksContainer').innerHTML = "<div style='color:#444; text-align:center; padding:20px; font-size:0.8rem;'>[ LOCKED ]</div>";
+        }
 
-        // Show Admin Panel if it's you
-        if (isAdmin) document.getElementById('adminPanel').style.display = 'block';
-
-        loadSecureLinks(); 
         initChat(); 
         startMatrixBg();
         startTrafficGraph();
@@ -247,7 +290,7 @@
       }
     });
 
-    // 3. CHAT SYSTEM (GOD MODE)
+    // CHAT SYSTEM
     const chatWindow = document.getElementById('chatWindow');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
@@ -257,6 +300,8 @@
       
       onSnapshot(q, (snapshot) => {
         chatWindow.innerHTML = ''; 
+        if(snapshot.empty) chatWindow.innerHTML = "<div style='text-align:center; color:#444; margin-top:20px; font-size:0.8rem;'>Channel Empty</div>";
+        
         snapshot.forEach((docSnap) => {
           renderMessage(docSnap.id, docSnap.data());
         });
@@ -267,27 +312,24 @@
     function renderMessage(docId, msg) {
       const div = document.createElement('div');
       div.className = 'chat-msg';
-      const time = msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '...';
+      const time = msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '';
       
-      // Admin Styling for Usernames
       let userClass = "chat-user";
       if(msg.isAdmin) userClass += " admin";
 
-      // System Message Styling
       let textClass = "chat-text";
       if(msg.type === "system") {
         textClass += " system";
-        msg.user = "SYSTEM ALERT"; // Override name
+        msg.user = "SYSTEM"; 
       }
 
-      // DELETE BUTTON (Only visible to Admin)
       let deleteHtml = "";
       if(isAdmin) {
-        deleteHtml = `<span class="delete-btn" onclick="window.deleteMessage('${docId}')">[X]</span>`;
+        deleteHtml = `<span class="delete-btn" onclick="window.deleteMessage('${docId}')">X</span>`;
       }
 
       div.innerHTML = `
-        <span class="${userClass}">[${msg.user.split('@')[0]}]</span>
+        <span class="${userClass}">${msg.user.split('@')[0]}</span>
         <span class="chat-time">${time}</span>
         ${deleteHtml}
         <div class="${textClass}">${msg.text}</div>
@@ -295,29 +337,20 @@
       chatWindow.appendChild(div);
     }
 
-    // MAKE DELETE FUNCTION GLOBAL
     window.deleteMessage = async (docId) => {
-      if(!confirm("DELETE THIS MESSAGE PERMANENTLY?")) return;
-      try {
-        await deleteDoc(doc(db, "globalChat", docId));
-      } catch(e) { alert("Error: " + e.message); }
+      if(!confirm("Delete?")) return;
+      try { await deleteDoc(doc(db, "globalChat", docId)); } catch(e) {}
     };
 
-    // SEND LOGIC
     async function sendMessage(type="normal") {
       const text = chatInput.value.trim();
       if (!text) return;
-
       try {
         await addDoc(collection(db, "globalChat"), {
-          text: text,
-          user: userEmail,
-          isAdmin: isAdmin,
-          type: type,
-          timestamp: serverTimestamp()
+          text: text, user: userEmail, isAdmin: isAdmin, type: type, timestamp: serverTimestamp()
         });
         chatInput.value = ''; 
-      } catch (e) { console.error(e); }
+      } catch (e) { alert("Error sending"); }
     }
 
     sendBtn.addEventListener('click', () => sendMessage("normal"));
@@ -325,62 +358,49 @@
       if (e.key === 'Enter') sendMessage("normal");
     });
 
-    // 4. ADMIN TOOLS
+    // ADMIN TOOLS
     document.getElementById('nukeBtn').addEventListener('click', async () => {
-      if(!confirm("WARNING: THIS WILL DELETE ALL MESSAGES FOR EVERYONE. PROCEED?")) return;
-      
+      if(!confirm("NUKE CHAT?")) return;
       const q = query(collection(db, "globalChat"));
       const snapshot = await getDocs(q);
       const batch = writeBatch(db);
-      
-      snapshot.forEach((doc) => {
-        batch.delete(doc.ref);
-      });
-      
+      snapshot.forEach((doc) => batch.delete(doc.ref));
       await batch.commit();
-      
-      // Post system message
       await addDoc(collection(db, "globalChat"), {
-        text: "CHAT LOGS PURGED BY ADMINISTRATOR.",
-        user: "SYSTEM",
-        type: "system",
-        isAdmin: true,
-        timestamp: serverTimestamp()
+        text: "LOGS PURGED", user: "SYSTEM", type: "system", isAdmin: true, timestamp: serverTimestamp()
       });
     });
 
     document.getElementById('sysMsgBtn').addEventListener('click', () => {
-      chatInput.value = "[ALERT] ";
-      chatInput.focus();
-      // Logic handles type in sendMessage, manual prefix for visual
+      const msg = prompt("Alert Message:");
+      if(msg) { chatInput.value = msg; sendMessage("system"); }
     });
 
-
-    // 5. LOAD LINKS
+    // LOAD LINKS
     async function loadSecureLinks() {
       const container = document.getElementById('linksContainer');
       try {
         const q = query(collection(db, 'secureLinks'), orderBy('order'));
         const snapshot = await getDocs(q);
         container.innerHTML = '';
-        if(snapshot.empty) { container.innerHTML = "<div style='color:red'>[ NO DATA NODES ]</div>"; return; }
+        if(snapshot.empty) { container.innerHTML = "<div style='color:#444'>[EMPTY]</div>"; return; }
         
         snapshot.forEach(doc => {
           const data = doc.data();
           const card = document.createElement('a');
           card.href = data.url; card.target = "_blank"; card.className = "holo-card";
-          card.innerHTML = `<h3>${data.title}</h3><p>${data.description}</p><div style="font-size:2rem; margin-top:10px;">${data.icon}</div>`;
+          card.innerHTML = `<h3>${data.title}</h3><p>${data.description}</p>`;
           container.appendChild(card);
         });
-      } catch (err) { console.log(err); }
+      } catch (err) {}
     }
 
-    // 6. VISUALS
+    // VISUALS
     function startMatrixBg() {
       const canvas = document.getElementById('bgCanvas');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-      const chars = "01BHAVXY"; const fontSize = 14; 
+      const chars = "01"; const fontSize = 12; 
       const drops = Array(Math.floor(canvas.width/fontSize)).fill(1);
       setInterval(() => {
         ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -398,24 +418,20 @@
       const cvs = document.getElementById('networkCanvas');
       const ctx = cvs.getContext('2d');
       const w = cvs.width = cvs.offsetWidth; const h = cvs.height = cvs.offsetHeight;
-      const dataPoints = Array(50).fill(h/2);
+      const dataPoints = Array(30).fill(h/2);
       setInterval(() => {
         dataPoints.shift(); dataPoints.push(Math.random() * h);
         ctx.fillStyle = "#001100"; ctx.fillRect(0,0,w,h);
         ctx.strokeStyle = "#0f0"; ctx.beginPath(); ctx.moveTo(0, dataPoints[0]);
-        for(let i=1; i<dataPoints.length; i++) ctx.lineTo(i * (w/50), dataPoints[i]);
+        for(let i=1; i<dataPoints.length; i++) ctx.lineTo(i * (w/30), dataPoints[i]);
         ctx.stroke();
       }, 100);
     }
 
     function startVitals() {
       setInterval(() => {
-        const cpu = Math.floor(Math.random() * 100);
-        document.getElementById('cpu0Val').innerText = cpu + "%";
-        document.getElementById('cpu0Bar').style.width = cpu + "%";
-        const ram = Math.floor(Math.random() * 80) + 20;
-        document.getElementById('ramVal').innerText = ram + "%";
-        document.getElementById('ramBar').style.width = ram + "%";
+        document.getElementById('cpu0Bar').style.width = Math.floor(Math.random() * 100) + "%";
+        document.getElementById('ramBar').style.width = (Math.floor(Math.random() * 80) + 20) + "%";
       }, 1000);
     }
 
@@ -425,4 +441,3 @@
   </script>
 </body>
 </html>
-
