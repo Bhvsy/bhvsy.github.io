@@ -1,6 +1,6 @@
 # ==========================================
 # Robots.txt for Bhavishya Parjapati Website
-# https://bhavishya709.github.io/
+# https://bhvsy.github.io/
 # ==========================================
 
 # Allow all search engines to crawl everything
@@ -8,7 +8,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location (IMPORTANT for SEO)
-Sitemap: https://bhavishya709.github.io/sitemap.xml
+Sitemap: https://bhvsy.github.io/sitemap.xml
 
 # Block the login page from being indexed
 Disallow: /login.html
