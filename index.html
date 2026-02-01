@@ -242,6 +242,15 @@
       position: relative;
       min-height: 100vh;
       min-height: 100dvh;
+      
+    /* ... keep your existing colors ... */
+    
+    /* ADD THESE LINES: */
+      background-attachment: scroll; /* fixes mobile lag */
+      will-change: transform;        /* warns browser of movement */
+      -webkit-font-smoothing: antialiased;
+      overscroll-behavior: none;     /* stops the "rubber band" bounce */
+
     }
 
     body.loaded .hero-content > * {
@@ -1595,6 +1604,7 @@
   </script>
 </body>
 </html>
+
 
 
 
