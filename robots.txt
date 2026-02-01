@@ -1,0 +1,39 @@
+# ==========================================
+# Robots.txt for Bhavishya Parjapati Website
+# https://bhavishya709.github.io/
+# ==========================================
+
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Sitemap location (IMPORTANT for SEO)
+Sitemap: https://bhavishya709.github.io/sitemap.xml
+
+# Block the login page from being indexed
+Disallow: /login.html
+
+# Optional: Crawl delay (1 second between requests)
+Crawl-delay: 1
+
+# ==========================================
+# Specific bot instructions
+# ==========================================
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /
+
+# Google AdSense (if you use it later)
+User-agent: Mediapartners-Google
+Allow: /

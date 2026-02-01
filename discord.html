@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord - Bhavishya Parjapati</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --neon-primary: #5865F2;
+      --neon-secondary: #7289DA;
+      --text-primary: #ffffff;
+      --text-secondary: #b8c5d6;
+      --card-bg: rgba(15, 23, 42, 0.6);
+      --border: rgba(88, 101, 242, 0.3);
+    }
+
+    body {
+      background: linear-gradient(135deg, #030712 0%, #0a0f1e 50%, #030712 100%);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .gradient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #5865F2 0%, transparent 70%);
+      top: -10%;
+      right: -10%;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #7289DA 0%, transparent 70%);
+      bottom: -10%;
+      left: -10%;
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      padding: 1rem 2rem;
+      background: rgba(88, 101, 242, 0.1);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--neon-primary);
+      text-decoration: none;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .back-btn:hover {
+      background: rgba(88, 101, 242, 0.2);
+      transform: translateX(-5px);
+    }
+
+    .platform-container {
+      max-width: 800px;
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .platform-icon {
+      font-size: 6rem;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 30px var(--neon-primary));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .platform-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .info-box {
+      background: rgba(88, 101, 242, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .info-box:hover {
+      background: rgba(88, 101, 242, 0.1);
+      border-color: var(--neon-primary);
+      transform: translateY(-5px);
+    }
+
+    .info-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .info-value {
+      font-size: 1.5rem;
+      color: var(--neon-primary);
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+    }
+
+    .copy-btn {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-top: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(88, 101, 242, 0.3);
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(88, 101, 242, 0.5);
+    }
+
+    .description {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin: 2rem 0;
+      font-size: 1.05rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .feature-item {
+      background: rgba(88, 101, 242, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      background: rgba(88, 101, 242, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-text {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .platform-container { padding: 3rem 2rem; }
+      h1 { font-size: 2rem; }
+      .back-btn { top: 1rem; left: 1rem; padding: 0.8rem 1.5rem; }
+      .copy-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="gradient-orb orb-1"></div>
+  <div class="gradient-orb orb-2"></div>
+
+  <a href="index.html" class="back-btn">← Back to Home</a>
+
+  <div class="platform-container">
+    <div class="platform-icon">💬</div>
+    
+    <h1>Discord Portal</h1>
+    <p class="platform-subtitle">Community & Voice Chat Hub</p>
+
+    <div class="info-box">
+      <div class="info-label">Discord Username</div>
+      <div class="info-value">Bhavishya709</div>
+    </div>
+
+    <p class="description">
+      Connect with me on Discord for real-time conversations, voice chats, and community interactions. Available for gaming sessions and casual hangouts.
+    </p>
+
+    <button class="copy-btn" onclick="copyUsername()">
+      Copy Username
+    </button>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-icon">💬</div>
+        <div class="feature-text">Text Chat</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎙️</div>
+        <div class="feature-text">Voice Chat</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎮</div>
+        <div class="feature-text">Gaming</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">👥</div>
+        <div class="feature-text">Community</div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top: 3rem;">
+      <div class="info-label">Status</div>
+      <div class="info-value" style="font-size: 1.2rem;">🟢 Online</div>
+    </div>
+  </div>
+
+  <script>
+    function copyUsername() {
+      navigator.clipboard.writeText('Bhavishya709').then(() => {
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Copied to Clipboard!';
+        btn.style.background = 'rgba(88, 101, 242, 0.3)';
+        
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = 'linear-gradient(135deg, #5865F2, #7289DA)';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

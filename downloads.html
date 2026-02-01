@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bhavishya Parjapati - Available Downloads">
+  <title>Available Downloads • Bhavishya Parjapati</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --neon-primary: #00f0ff;
+      --download-purple: #a020f0;
+      --text-primary: #ffffff;
+      --text-secondary: #b8c5d6;
+      --bg-primary: #030712;
+      --border: rgba(0, 240, 255, 0.2);
+      --glow: 0 0 30px rgba(160, 32, 240, 0.4), inset 0 0 15px rgba(160, 32, 240, 0.2);
+    }
+
+    body {
+      background: linear-gradient(135deg, #030712 0%, #0a0f1e 50%, #030712 100%);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--download-purple) 0%, transparent 70%);
+      top: -10%;
+      right: -10%;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      padding: 1rem 2rem;
+      background: rgba(160, 32, 240, 0.1);
+      border: 1px solid rgba(160, 32, 240, 0.3);
+      border-radius: 12px;
+      color: var(--download-purple);
+      text-decoration: none;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 0 30px rgba(160, 32, 240, 0.3);
+    }
+
+    .back-btn:hover {
+      background: rgba(160, 32, 240, 0.2);
+      transform: translateX(-5px);
+      box-shadow: 0 0 50px rgba(160, 32, 240, 0.5);
+    }
+
+    .downloads-container {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .downloads-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      background: linear-gradient(135deg, var(--text-primary), var(--download-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 2rem;
+    }
+
+    .downloads-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 4rem;
+      line-height: 1.8;
+    }
+
+    .drive-icon {
+      font-size: 8rem;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 40px rgba(160, 32, 240, 0.6));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* 🔥 Button Container */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    /* Google Drive Button */
+    .drive-button {
+      display: inline-block;
+      padding: 2rem 4rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--download-purple), #d46aff);
+      color: #000;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 50px rgba(160, 32, 240, 0.4);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .drive-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+      transition: 0.8s;
+    }
+
+    .drive-button:hover::before {
+      left: 100%;
+    }
+
+    .drive-button:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 
+        0 30px 70px rgba(160, 32, 240, 0.6),
+        var(--glow);
+    }
+
+    .drive-button:active {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    /* 🔥 NEW: Login Button */
+    .login-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.2rem 3rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--neon-primary), #00c8d4);
+      color: #000;
+      text-decoration: none;
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border: 2px solid transparent;
+    }
+
+    .login-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+      transition: 0.6s;
+    }
+
+    .login-button:hover::before {
+      left: 100%;
+    }
+
+    .login-button:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 20px 50px rgba(0, 240, 255, 0.5);
+      border-color: rgba(0, 240, 255, 0.5);
+    }
+
+    .login-button:active {
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    /* Divider between buttons */
+    .button-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--neon-primary), transparent);
+      margin: 0.5rem 0;
+      opacity: 0.5;
+    }
+
+    /* Info text */
+    .login-info {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .login-info strong {
+      color: var(--neon-primary);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .downloads-title {
+        font-size: 2.5rem;
+      }
+
+      .downloads-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .drive-icon {
+        font-size: 5rem;
+      }
+
+      .drive-button {
+        padding: 1.5rem 3rem;
+        font-size: 1.2rem;
+      }
+
+      .login-button {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+      }
+
+      .back-btn {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      .button-group {
+        gap: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="download-orb"></div>
+  
+  <a href="about-identity.html" class="back-btn">
+    ← Back to Identity
+  </a>
+
+  <div class="downloads-container">
+    <h1 class="downloads-title">Available Downloads</h1>
+    <p class="downloads-subtitle">
+      Access all exclusive content via Google Drive
+    </p>
+    
+    <div class="drive-icon">☁️</div>
+    
+    <!-- 🔥 BUTTON GROUP -->
+    <div class="button-group">
+      <!-- Google Drive Button -->
+      <a href="https://drive.google.com/drive/folders/1Iq30NaP1cSXtrevMbXR8MjUqZZI_ZmLo?usp=sharing" target="_blank" rel="noopener" class="drive-button">
+        Open Google Drive →
+      </a>
+      
+      <!-- Divider -->
+      <div class="button-divider"></div>
+      
+      <!-- 🔥 NEW: Login Button -->
+      <a href="login.html" class="login-button">
+        🔐 Secure Login Portal
+      </a>
+    </div>
+
+    <!-- Info Box -->
+    <div class="login-info">
+      <strong>🔒 Protected Area:</strong> Login to access exclusive links, private files, and premium content
+    </div>
+  </div>
+</body>
+</html>
+

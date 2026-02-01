@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram - Bhavishya Parjapati</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --neon-primary: #E1306C;
+      --neon-secondary: #FD1D1D;
+      --text-primary: #ffffff;
+      --text-secondary: #b8c5d6;
+      --card-bg: rgba(15, 23, 42, 0.6);
+      --border: rgba(225, 48, 108, 0.2);
+    }
+
+    body {
+      background: linear-gradient(135deg, #030712 0%, #0a0f1e 50%, #030712 100%);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      padding: 1rem 2rem;
+      background: rgba(225, 48, 108, 0.1);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--neon-primary);
+      text-decoration: none;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .back-btn:hover {
+      background: rgba(225, 48, 108, 0.2);
+      transform: translateX(-5px);
+    }
+
+    .platform-container {
+      max-width: 800px;
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .platform-icon {
+      font-size: 6rem;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 30px var(--neon-primary));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--neon-secondary), var(--neon-primary), #FD1D1D, #F77737);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .platform-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .info-box {
+      background: rgba(225, 48, 108, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .info-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .info-value {
+      font-size: 1.5rem;
+      color: var(--neon-primary);
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+    }
+
+    .action-btn {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(135deg, #F77737, var(--neon-primary), var(--neon-secondary));
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-top: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(225, 48, 108, 0.3);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(225, 48, 108, 0.5);
+    }
+
+    .description {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .platform-container { padding: 3rem 2rem; }
+      h1 { font-size: 2rem; }
+      .back-btn { top: 1rem; left: 1rem; padding: 0.8rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">← Back to Home</a>
+
+  <div class="platform-container">
+    <div class="platform-icon">📸</div>
+    
+    <h1>Instagram Portal</h1>
+    <p class="platform-subtitle">Visual Stories & Moments</p>
+
+    <div class="info-box">
+      <div class="info-label">Username</div>
+      <div class="info-value">@mrfuture709</div>
+    </div>
+
+    <p class="description">
+      Follow my journey through visual stories, behind-the-scenes moments, and daily updates. 
+      Connect with me on Instagram for a more personal glimpse into my digital realm.
+    </p>
+
+    <a href="https://instagram.com/mrfuture709" target="_blank" class="action-btn">
+      Visit Instagram Profile →
+    </a>
+
+    <div class="info-box" style="margin-top: 3rem;">
+      <div class="info-label">Content Type</div>
+      <div class="info-value" style="font-size: 1.2rem;">Tech • Life • Journey</div>
+    </div>
+  </div>
+</body>
+
+</html>

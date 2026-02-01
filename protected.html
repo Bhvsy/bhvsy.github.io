@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protected Area • Bhavishya Parjapati</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --neon-primary: #00f0ff;
+      --neon-secondary: #ff006e;
+      --text-primary: #ffffff;
+      --text-secondary: #b8c5d6;
+      --bg-primary: #030712;
+      --card-bg: rgba(15, 23, 42, 0.6);
+      --border: rgba(0, 240, 255, 0.2);
+      --glow: 0 0 30px rgba(0, 240, 255, 0.4);
+    }
+
+    body {
+      background: linear-gradient(135deg, #030712 0%, #0a0f1e 50%, #030712 100%);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #030712;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(0, 240, 255, 0.1);
+      border-top-color: var(--neon-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .protected-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--neon-primary) 0%, transparent 70%);
+      top: -10%;
+      right: -10%;
+    }
+
+    .header {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-avatar {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .welcome-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--text-primary), var(--neon-primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .user-email {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .logout-btn {
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, var(--neon-secondary), #ff4081);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .logout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 0, 110, 0.4);
+    }
+
+    .protected-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .protected-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--text-primary), var(--neon-primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 3rem;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .link-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .link-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--neon-primary);
+      box-shadow: 0 20px 50px rgba(0, 240, 255, 0.3), var(--glow);
+    }
+
+    .link-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 20px currentColor);
+    }
+
+    .link-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      color: var(--neon-primary);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .link-description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .link-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+      color: #000;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
+    }
+
+    .error-message {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 0, 110, 0.1);
+      border: 1px solid rgba(255, 0, 110, 0.3);
+      border-radius: 12px;
+      color: var(--neon-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .protected-title {
+        font-size: 2rem;
+      }
+
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loader"></div>
+    <div class="loading-text">Verifying authentication...</div>
+  </div>
+
+  <div class="protected-orb"></div>
+
+  <div id="protectedContent" style="display: none;">
+    <div class="header">
+      <div class="user-info">
+        <div class="user-avatar">👤</div>
+        <div>
+          <div class="welcome-text">Welcome Back!</div>
+          <div class="user-email" id="userEmail">Loading...</div>
+        </div>
+      </div>
+      <button class="logout-btn" id="logoutBtn">
+        Logout →
+      </button>
+    </div>
+
+    <div class="protected-container">
+      <h1 class="protected-title">Protected Links</h1>
+
+      <!-- Links will be loaded dynamically from Firestore -->
+      <div class="links-grid" id="linksContainer">
+        <!-- Loading state -->
+        <div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">
+          Loading your secure links...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+    import { getFirestore, collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA2W2IcHrs0WasQuBk2h4nqui3z7_P6OmU",
+      authDomain: "bhavishya-auth.firebaseapp.com",
+      projectId: "bhavishya-auth",
+      storageBucket: "bhavishya-auth.firebasestorage.app",
+      messagingSenderId: "286150672573",
+      appId: "1:286150672573:web:09bddc533e74c0c356f7d4",
+      measurementId: "G-Q549BE9V0X"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Function to load links from Firestore
+    async function loadSecureLinks() {
+      const linksContainer = document.getElementById('linksContainer');
+      
+      try {
+        // Query Firestore for secure links, ordered by 'order' field
+        const q = query(collection(db, 'secureLinks'), orderBy('order'));
+        const querySnapshot = await getDocs(q);
+
+        // Clear loading message
+        linksContainer.innerHTML = '';
+
+        if (querySnapshot.empty) {
+          linksContainer.innerHTML = `
+            <div class="error-message" style="grid-column: 1/-1;">
+              No links found. Please add links to your Firestore database.
+            </div>
+          `;
+          return;
+        }
+
+        // Create link cards from Firestore data
+        querySnapshot.forEach((doc) => {
+          const link = doc.data();
+          
+          const card = document.createElement('div');
+          card.className = 'link-card';
+          card.innerHTML = `
+            <div class="link-icon">${link.icon || '🔗'}</div>
+            <h3 class="link-title">${link.title || 'Untitled'}</h3>
+            <p class="link-description">${link.description || 'No description'}</p>
+            <a href="${link.url}" target="_blank" class="link-btn">
+              Open Link →
+            </a>
+          `;
+          
+          linksContainer.appendChild(card);
+        });
+
+      } catch (error) {
+        console.error('Error loading links:', error);
+        linksContainer.innerHTML = `
+          <div class="error-message" style="grid-column: 1/-1;">
+            ❌ Error loading links: ${error.message}<br>
+            <small>Make sure Firestore is enabled and security rules are set.</small>
+          </div>
+        `;
+      }
+    }
+
+    // Check authentication status
+    onAuthStateChanged(auth, async (user) => {
+      const loadingScreen = document.getElementById('loadingScreen');
+      const protectedContent = document.getElementById('protectedContent');
+
+      if (user) {
+        // User is authenticated
+        document.getElementById('userEmail').textContent = user.email;
+        
+        // Load secure links from Firestore
+        await loadSecureLinks();
+        
+        // Hide loading, show content
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+          protectedContent.style.display = 'block';
+        }, 500);
+
+      } else {
+        // User is NOT authenticated - redirect to login
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      try {
+        await signOut(auth);
+        window.location.href = 'login.html';
+      } catch (error) {
+        console.error('Logout error:', error);
+        alert('Logout failed. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>
