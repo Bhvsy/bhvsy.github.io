@@ -246,7 +246,7 @@
       letter-spacing: 2px;
     }
 
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
@@ -254,6 +254,27 @@
       transition: color 0.3s ease;
     }
     .nav-links a:hover { color: var(--neon-primary); }
+
+    /* === NEW LOGIN BUTTON STYLE === */
+    .nav-btn {
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--neon-primary);
+      border-radius: 50px;
+      color: var(--neon-primary) !important;
+      font-weight: 600;
+      letter-spacing: 1px;
+      background: rgba(0, 240, 255, 0.05);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-size: 0.8rem !important;
+    }
+
+    .nav-btn:hover {
+      background: var(--neon-primary);
+      color: #000 !important;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+      transform: translateY(-2px);
+    }
 
     /* ========== HERO SECTION ========== */
     .hero {
@@ -365,15 +386,18 @@
       color: var(--text-primary);
     }
 
+    /* === THE FIXED GRID SYSTEM (3x3) === */
     .portal-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(3, 1fr); 
       gap: 1.5rem;
+      max-width: 900px; 
+      margin: 0 auto; 
     }
 
     .portal-card {
       background: var(--card-bg);
-      backdrop-filter: blur(10px); /* Optimized Blur */
+      backdrop-filter: blur(10px); 
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 1.5rem;
@@ -384,7 +408,7 @@
       text-decoration: none;
       color: var(--text-primary);
       transition: transform 0.3s ease;
-      transform: translateZ(0); /* Hardware Accel */
+      transform: translateZ(0); 
     }
 
     .portal-card:hover { transform: translateY(-5px); border-color: var(--neon-primary); }
@@ -426,7 +450,12 @@
       .nav-links { display: none; }
       .hero { padding: 0 1rem; }
       .quick-stats { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-      .portal-grid { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+      
+      .portal-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 0.8rem; 
+      }
+      
       .portal-card { padding: 1rem; }
       .portal-icon { font-size: 1.8rem; }
       .portal-name { font-size: 0.7rem; }
@@ -453,6 +482,7 @@
       <li><a href="#hero">Home</a></li>
       <li><a href="#contact">Connect</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="login.html" class="nav-btn">Login</a></li>
     </ul>
   </nav>
 
