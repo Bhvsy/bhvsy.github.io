@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EMPEROR CONSOLE | LEVEL 5 ACCESS</title>
+  <title>EMPEROR CONSOLE | SQUADRON COMMS</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
@@ -16,7 +16,7 @@
       --hacker-dark: #001100;
       --alert-red: #ff3333;
       --cyan: #0ff;
-      --scanline: rgba(0, 0, 0, 0.5);
+      --msg-bg: rgba(0, 20, 0, 0.5);
     }
 
     body {
@@ -30,11 +30,7 @@
     }
 
     /* ========== BACKGROUND FX ========== */
-    #bgCanvas {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1; opacity: 0.2;
-    }
-
+    #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; }
     .crt-overlay {
       position: fixed; inset: 0; pointer-events: none; z-index: 9999;
       background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
@@ -42,134 +38,110 @@
       background-size: 100% 2px, 3px 100%;
     }
 
-    /* ========== BOOT SEQUENCE ( BIOS ) ========== */
-    #bootScreen {
-      position: fixed; inset: 0; background: #000; z-index: 10000;
-      padding: 2rem; display: flex; flex-direction: column; justify-content: flex-start;
-      font-family: 'Share Tech Mono', monospace; font-size: 1.2rem;
-    }
-    .bios-text { color: var(--hacker-green); margin-bottom: 5px; }
-    .bios-warning { color: var(--alert-red); font-weight: bold; }
-
-    /* ========== MAIN UI ========== */
-    #mainInterface { display: none; height: 100%; grid-template-rows: auto 1fr; }
+    /* ========== UI STRUCTURE ========== */
+    #mainInterface { height: 100%; display: grid; grid-template-rows: auto 1fr; }
 
     header {
       border-bottom: 2px solid var(--hacker-green);
       padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
-      background: rgba(0, 20, 0, 0.9);
-      box-shadow: 0 0 20px var(--hacker-green);
+      background: rgba(0, 20, 0, 0.9); box-shadow: 0 0 20px var(--hacker-green);
     }
 
     h1 { font-family: 'Orbitron', sans-serif; letter-spacing: 3px; text-shadow: 0 0 10px var(--hacker-green); margin: 0; font-size: 1.5rem; }
 
-    .top-bar-stats { display: flex; gap: 2rem; font-size: 0.9rem; }
-    .stat-box { border: 1px solid var(--hacker-green); padding: 5px 10px; background: rgba(0, 255, 0, 0.1); }
-
-    /* ========== DASHBOARD GRID ========== */
     .dashboard {
-      display: grid; grid-template-columns: 300px 1fr 300px;
+      display: grid; grid-template-columns: 400px 1fr 300px; /* Wider Left Panel for Chat */
       gap: 1rem; padding: 1rem; height: 100%; overflow: hidden;
     }
 
-    /* PANELS */
     .panel {
       border: 1px solid var(--hacker-green);
       background: rgba(0, 10, 0, 0.8);
       padding: 1rem; display: flex; flex-direction: column;
       position: relative;
     }
-    .panel::after {
-      content: ''; position: absolute; top: -2px; left: -2px; width: 10px; height: 10px;
-      border-top: 2px solid var(--hacker-green); border-left: 2px solid var(--hacker-green);
-    }
     .panel-title {
       background: var(--hacker-green); color: #000; padding: 2px 10px;
-      font-weight: bold; margin-bottom: 1rem; display: inline-block; width: fit-content;
+      font-weight: bold; margin-bottom: 0.5rem; display: inline-block; width: fit-content;
     }
 
-    /* LEFT: TERMINAL */
-    .terminal { flex-grow: 1; overflow-y: auto; font-size: 0.8rem; scrollbar-width: none; }
-    .log-line { margin-bottom: 4px; border-left: 2px solid transparent; padding-left: 5px; }
-    .log-line.success { border-left-color: var(--hacker-green); color: #afffaf; }
-    .log-line.error { border-left-color: var(--alert-red); color: var(--alert-red); }
-    .log-line.system { color: var(--cyan); }
+    /* ========== CHAT ROOM STYLES (NEW) ========== */
+    #chatWindow {
+      flex-grow: 1; overflow-y: auto; font-size: 0.9rem; 
+      border-bottom: 1px solid #333; margin-bottom: 10px; padding-right: 5px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    
+    .chat-msg { padding: 5px; border-left: 2px solid var(--hacker-green); background: var(--msg-bg); word-wrap: break-word; }
+    .chat-user { color: var(--cyan); font-weight: bold; font-size: 0.8rem; }
+    .chat-text { color: #fff; }
+    .chat-time { float: right; font-size: 0.7rem; color: #666; }
+    
+    .chat-input-area { display: flex; gap: 10px; }
+    #chatInput {
+      flex-grow: 1; background: #000; border: 1px solid var(--hacker-green);
+      color: var(--hacker-green); font-family: 'Share Tech Mono'; padding: 8px;
+    }
+    #sendBtn {
+      background: var(--hacker-green); color: #000; border: none; padding: 0 15px;
+      font-weight: bold; cursor: pointer; font-family: 'Orbitron';
+    }
+    #sendBtn:hover { background: #fff; }
 
-    /* CENTER: LINKS (THE API CONTENT) */
+    /* ========== CENTER LINKS ========== */
     .link-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1.5rem; overflow-y: auto; padding: 1rem;
     }
-
     .holo-card {
-      border: 1px solid var(--hacker-green);
-      background: rgba(0, 30, 0, 0.6);
+      border: 1px solid var(--hacker-green); background: rgba(0, 30, 0, 0.6);
       padding: 1.5rem; text-decoration: none; color: var(--hacker-green);
-      transition: 0.2s; position: relative; overflow: hidden;
-      clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+      transition: 0.2s; position: relative; clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
     }
-    .holo-card:hover {
-      background: rgba(0, 255, 0, 0.1);
-      box-shadow: 0 0 15px var(--hacker-green);
-      transform: scale(1.02);
-    }
-    .holo-card h3 { margin-bottom: 0.5rem; font-family: 'Orbitron'; font-size: 1rem; }
-    .holo-card p { font-size: 0.75rem; color: #aaffaa; }
+    .holo-card:hover { background: rgba(0, 255, 0, 0.1); box-shadow: 0 0 15px var(--hacker-green); transform: scale(1.02); }
 
-    /* RIGHT: SYSTEM VITALS */
+    /* ========== RIGHT VITALS ========== */
     #networkCanvas { width: 100%; height: 150px; border: 1px solid #333; margin-bottom: 1rem; }
-    
     .vital-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.8rem; }
     .bar-container { width: 100%; height: 5px; background: #333; margin-bottom: 15px; }
     .bar-fill { height: 100%; background: var(--hacker-green); width: 0%; transition: width 0.5s; }
 
-    /* LOGOUT BUTTON */
     .abort-btn {
       background: #000; border: 1px solid var(--alert-red); color: var(--alert-red);
-      padding: 0.5rem 2rem; cursor: pointer; font-family: 'Share Tech Mono';
-      font-weight: bold; transition: 0.3s;
+      padding: 0.5rem 1rem; cursor: pointer; font-family: 'Share Tech Mono'; transition: 0.3s;
     }
     .abort-btn:hover { background: var(--alert-red); color: #000; box-shadow: 0 0 20px var(--alert-red); }
 
-    /* MOBILE ADJUSTMENTS */
+    /* MOBILE */
     @media (max-width: 900px) {
-      .dashboard { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
-      .terminal, #rightPanel { height: 200px; }
+      .dashboard { grid-template-columns: 1fr; grid-template-rows: 400px 1fr auto; }
     }
   </style>
 </head>
 <body>
 
   <div class="crt-overlay"></div>
-
   <canvas id="bgCanvas"></canvas>
-
-  <div id="bootScreen">
-    <div class="bios-text">BHAVXY_BIOS v.5.0.1 (c) 2026 Parjapati Corp</div>
-    <div class="bios-text">Memory Test: <span id="memTest">0</span>KB OK</div>
-    <div class="bios-text">Initializing CPU Cores... [OK]</div>
-    <div class="bios-text">Loading Kernel... [OK]</div>
-    <div class="bios-text">Mounting Firebase File System...</div>
-    <br>
-    <div class="bios-text" id="bootLog"></div>
-  </div>
 
   <div id="mainInterface">
     <header>
       <h1>EMPEROR<span style="color:#fff">_OS</span></h1>
-      <div class="top-bar-stats">
-        <div class="stat-box">SECURE_MODE: ON</div>
-        <div class="stat-box" id="clock">00:00:00</div>
-      </div>
-      <button class="abort-btn" id="logoutBtn">TERMINATE SESSION</button>
+      <div style="font-size:0.8rem;">USER: <span id="currentUser" style="color:var(--cyan)">DETECTING...</span></div>
+      <button class="abort-btn" id="logoutBtn">LOGOUT</button>
     </header>
 
     <div class="dashboard">
       
       <div class="panel">
-        <div class="panel-title">SYSTEM_LOGS</div>
-        <div class="terminal" id="terminal">
-          <div class="log-line system">_INITIATING PROTOCOL 709</div>
+        <div class="panel-title">SQUADRON_COMMS</div>
+        
+        <div id="chatWindow">
+          <div style="text-align:center; color:#666; margin-top:50px;">Creating Secure Channel...</div>
+        </div>
+        
+        <div class="chat-input-area">
+          <input type="text" id="chatInput" placeholder="Enter encrypted message..." autocomplete="off">
+          <button id="sendBtn">SEND</button>
         </div>
       </div>
 
@@ -179,17 +151,13 @@
           </div>
       </div>
 
-      <div class="panel" id="rightPanel">
+      <div class="panel">
         <div class="panel-title">NETWORK_TRAFFIC</div>
         <canvas id="networkCanvas"></canvas>
-        
         <div class="vital-row"><span>CPU0</span><span id="cpu0Val">12%</span></div>
         <div class="bar-container"><div class="bar-fill" id="cpu0Bar"></div></div>
-        
         <div class="vital-row"><span>RAM</span><span id="ramVal">45%</span></div>
         <div class="bar-container"><div class="bar-fill" id="ramBar"></div></div>
-        
-        <div class="vital-row"><span>UPLOAD</span><span>1.2 GB/s</span></div>
       </div>
 
     </div>
@@ -198,7 +166,7 @@
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
     import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-    import { getFirestore, collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getFirestore, collection, getDocs, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
     // 1. FIREBASE CONFIG
     const firebaseConfig = {
@@ -215,172 +183,146 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // 2. BOOT SEQUENCE
-    const bootScreen = document.getElementById('bootScreen');
-    const memTest = document.getElementById('memTest');
-    const bootLog = document.getElementById('bootLog');
-    
-    let mem = 0;
-    const memInterval = setInterval(() => {
-      mem += 4096;
-      memTest.innerText = mem;
-      if(mem > 262144) clearInterval(memInterval);
-    }, 10);
+    let userEmail = "Unknown";
 
-    // 3. AUTH LOGIC
+    // 2. AUTH & INIT
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        addBootLog("Identity Verified: " + user.email);
-        addBootLog("Decrypting Environment...");
+        userEmail = user.email.split('@')[0]; // Use name before @
+        document.getElementById('currentUser').innerText = userEmail.toUpperCase();
         
-        setTimeout(() => {
-          addBootLog("<span class='bios-warning'>ACCESS GRANTED</span>");
-          setTimeout(() => {
-            bootScreen.style.display = 'none';
-            document.getElementById('mainInterface').style.display = 'grid';
-            startMatrixBg();
-            startTrafficGraph();
-            startVitals();
-            log("System Online.", "success");
-            loadSecureLinks(); // CALL THE API
-          }, 1000);
-        }, 1500);
+        loadSecureLinks(); // Load Links
+        initChat(); // Start Chat Listener
+        startMatrixBg();
+        startTrafficGraph();
+        startVitals();
       } else {
         window.location.href = 'login.html';
       }
     });
 
-    function addBootLog(msg) {
-      bootLog.innerHTML += `<div>> ${msg}</div>`;
-    }
+    // 3. CHAT SYSTEM (REAL-TIME)
+    const chatWindow = document.getElementById('chatWindow');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
 
-    // 4. TERMINAL LOGIC
-    const terminal = document.getElementById('terminal');
-    function log(msg, type="system") {
-      const div = document.createElement('div');
-      div.className = `log-line ${type}`;
-      div.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
-      terminal.appendChild(div);
-      terminal.scrollTop = terminal.scrollHeight;
-    }
-
-    // 5. API DATA FETCH (The "Master" Part)
-    async function loadSecureLinks() {
-      const container = document.getElementById('linksContainer');
-      log("Initializing Secure Handshake...", "system");
+    function initChat() {
+      // Listen for new messages
+      const q = query(collection(db, "globalChat"), orderBy("timestamp"));
       
-      try {
-        const q = query(collection(db, 'secureLinks'), orderBy('order'));
-        const snapshot = await getDocs(q);
-        
-        container.innerHTML = '';
-        
-        if(snapshot.empty) {
-          log("Warning: No Data Packages Found.", "error");
-          container.innerHTML = "<div style='color:red'>[ NO DATA NODES ]</div>";
-          return;
-        }
-
-        log(`Decrypted ${snapshot.size} Data Nodes.`, "success");
-
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          const card = document.createElement('a');
-          card.href = data.url;
-          card.target = "_blank";
-          card.className = "holo-card";
-          
-          // "Decryption" text effect placeholder
-          card.innerHTML = `
-            <h3>${data.title || 'ENCRYPTED'}</h3>
-            <p>${data.description || 'Access Restricted'}</p>
-            <div style="font-size:2rem; margin-top:10px;">${data.icon || '🔒'}</div>
-          `;
-          container.appendChild(card);
+      onSnapshot(q, (snapshot) => {
+        chatWindow.innerHTML = ''; // Clear current view
+        snapshot.forEach((doc) => {
+          const msg = doc.data();
+          renderMessage(msg);
         });
+        chatWindow.scrollTop = chatWindow.scrollHeight; // Auto scroll down
+      });
+    }
 
-      } catch (err) {
-        log("API Handshake Failed: " + err.message, "error");
+    function renderMessage(msg) {
+      const div = document.createElement('div');
+      div.className = 'chat-msg';
+      // Convert timestamp to time string
+      const time = msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '...';
+      
+      div.innerHTML = `
+        <span class="chat-user">[${msg.user}]</span>
+        <span class="chat-time">${time}</span>
+        <div class="chat-text">${msg.text}</div>
+      `;
+      chatWindow.appendChild(div);
+    }
+
+    // Send Message Logic
+    async function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      try {
+        await addDoc(collection(db, "globalChat"), {
+          text: text,
+          user: userEmail,
+          timestamp: serverTimestamp()
+        });
+        chatInput.value = ''; // Clear input
+      } catch (e) {
+        console.error("Error sending message: ", e);
+        alert("Transmission Failed. Check Console.");
       }
     }
 
-    // 6. GRAPHICS & ANIMATION
-    
-    // Matrix-style Background
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // 4. LOAD LINKS (From previous step)
+    async function loadSecureLinks() {
+      const container = document.getElementById('linksContainer');
+      try {
+        const q = query(collection(db, 'secureLinks'), orderBy('order'));
+        const snapshot = await getDocs(q);
+        container.innerHTML = '';
+        if(snapshot.empty) { container.innerHTML = "<div style='color:red'>[ NO DATA NODES ]</div>"; return; }
+        
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const card = document.createElement('a');
+          card.href = data.url; card.target = "_blank"; card.className = "holo-card";
+          card.innerHTML = `<h3>${data.title}</h3><p>${data.description}</p><div style="font-size:2rem; margin-top:10px;">${data.icon}</div>`;
+          container.appendChild(card);
+        });
+      } catch (err) { console.log(err); }
+    }
+
+    // 5. VISUALS
     function startMatrixBg() {
       const canvas = document.getElementById('bgCanvas');
       const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      
-      const chars = "010101BHAVXY";
-      const fontSize = 14;
-      const columns = canvas.width / fontSize;
-      const drops = Array(Math.floor(columns)).fill(1);
-
-      function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#0f0";
-        ctx.font = fontSize + "px monospace";
-
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+      const chars = "01BHAVXY"; const fontSize = 14; 
+      const drops = Array(Math.floor(canvas.width/fontSize)).fill(1);
+      setInterval(() => {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0f0"; ctx.font = fontSize + "px monospace";
         for(let i=0; i<drops.length; i++) {
           const text = chars[Math.floor(Math.random()*chars.length)];
           ctx.fillText(text, i*fontSize, drops[i]*fontSize);
           if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
           drops[i]++;
         }
-      }
-      setInterval(draw, 50);
+      }, 50);
     }
 
-    // Fake Network Traffic Graph
     function startTrafficGraph() {
       const cvs = document.getElementById('networkCanvas');
       const ctx = cvs.getContext('2d');
-      const w = cvs.width = cvs.offsetWidth;
-      const h = cvs.height = cvs.offsetHeight;
+      const w = cvs.width = cvs.offsetWidth; const h = cvs.height = cvs.offsetHeight;
       const dataPoints = Array(50).fill(h/2);
-      
       setInterval(() => {
-        dataPoints.shift();
-        dataPoints.push(Math.random() * h);
-        
-        ctx.fillStyle = "#001100";
-        ctx.fillRect(0,0,w,h);
-        ctx.strokeStyle = "#0f0";
-        ctx.beginPath();
-        ctx.moveTo(0, dataPoints[0]);
-        for(let i=1; i<dataPoints.length; i++) {
-          ctx.lineTo(i * (w/50), dataPoints[i]);
-        }
+        dataPoints.shift(); dataPoints.push(Math.random() * h);
+        ctx.fillStyle = "#001100"; ctx.fillRect(0,0,w,h);
+        ctx.strokeStyle = "#0f0"; ctx.beginPath(); ctx.moveTo(0, dataPoints[0]);
+        for(let i=1; i<dataPoints.length; i++) ctx.lineTo(i * (w/50), dataPoints[i]);
         ctx.stroke();
       }, 100);
     }
 
-    // Random CPU/RAM Numbers
     function startVitals() {
       setInterval(() => {
         const cpu = Math.floor(Math.random() * 100);
         document.getElementById('cpu0Val').innerText = cpu + "%";
         document.getElementById('cpu0Bar').style.width = cpu + "%";
-        
         const ram = Math.floor(Math.random() * 80) + 20;
         document.getElementById('ramVal').innerText = ram + "%";
         document.getElementById('ramBar').style.width = ram + "%";
-        
-        // Update Clock
-        const now = new Date();
-        document.getElementById('clock').innerText = now.toLocaleTimeString();
       }, 1000);
     }
 
-    // Logout
     document.getElementById('logoutBtn').addEventListener('click', async () => {
-      await signOut(auth);
-      window.location.href = 'login.html';
+      await signOut(auth); window.location.href = 'login.html';
     });
-
   </script>
 </body>
 </html>
