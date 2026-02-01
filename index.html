@@ -6,69 +6,18 @@
   
   <meta name="google-site-verification" content="v1_hVSU66-oG9amHoQxf-djSVtDhSuA4p0PAXCNxaaI" />
   
-  <title>Bhavishya Parjapati | Digital Architect & Cyber Entity | Official Website</title>
-  <meta name="title" content="Bhavishya Parjapati | Digital Architect & Cyber Entity | Official Website">
-  <meta name="description" content="Official website of Bhavishya Parjapati (Bhavxy). Digital Architect, Trader, and Tech Enthusiast. Connect across 12+ platforms including Instagram, Discord, Steam.">
-  <meta name="keywords" content="Bhavishya Parjapati, Bhavxy, bhvsy, Digital Architect, Web Developer, HBSE 10th, Bhavishya Parjapati official, Bhavishya Parjapati portfolio">
-  <meta name="author" content="Bhavishya Parjapati">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#00f0ff">
-  
+  <title>Bhavishya Parjapati | Digital Architect & Cyber Entity</title>
+  <meta name="description" content="Official website of Bhavishya Parjapati (Bhavxy). Digital Architect, Trader, and Tech Enthusiast.">
   <link rel="canonical" href="https://bhvsy.github.io/">
-  
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://bhvsy.github.io/">
-  <meta property="og:title" content="Bhavishya Parjapati | Digital Architect">
-  <meta property="og:description" content="Official digital presence of Bhavishya Parjapati. Connect across multiple platforms.">
-  <meta property="og:image" content="https://bhvsy.github.io/og-image.jpg">
-  
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://bhvsy.github.io/">
-  <meta name="twitter:title" content="Bhavishya Parjapati | Digital Architect">
-  <meta name="twitter:description" content="Official digital presence of Bhavishya Parjapati.">
-  <meta name="twitter:image" content="https://bhvsy.github.io/og-image.jpg">
-  
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#00f0ff">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;700&family=Orbitron:wght@700;900&family=Cinzel:wght@700&display=swap" rel="stylesheet">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://bhvsy.github.io/#website",
-        "url": "https://bhvsy.github.io/",
-        "name": "Bhavishya Parjapati",
-        "description": "Official Website of Bhavishya Parjapati",
-        "publisher": { "@id": "https://bhvsy.github.io/#person" }
-      },
-      {
-        "@type": "Person",
-        "@id": "https://bhvsy.github.io/#person",
-        "name": "Bhavishya Parjapati",
-        "alternateName": ["Bhavxy", "BP"],
-        "url": "https://bhvsy.github.io/",
-        "jobTitle": "Digital Architect",
-        "sameAs": [
-          "https://bhvsy.github.io/instagram.html",
-          "https://bhvsy.github.io/discord.html"
-        ]
-      }
-    ]
-  }
-  </script>
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ========== RESET & VARIABLES ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --neon-primary: #00f0ff;
@@ -81,17 +30,12 @@
       --bg-primary: #030712;
       --card-bg: rgba(15, 23, 42, 0.6);
       --border: rgba(0, 240, 255, 0.2);
-      --divine-gold: #ffdf6b;
     }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-    }
+    html { scroll-behavior: smooth; }
 
-    /* ========== HIGH PERFORMANCE BACKGROUND FIX ========== */
     body {
-      background-color: #030712; /* Solid fallback color */
+      background-color: #030712;
       color: var(--text-primary);
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
@@ -100,116 +44,30 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* This creates the gradient on a separate "layer" that never moves */
+    /* Fixed Background Layer (Performance Fix) */
     body::before {
       content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       background: linear-gradient(135deg, #030712 0%, #0a0f1e 50%, #030712 100%);
       z-index: -2;
-      transform: translateZ(0); /* Forces GPU to handle this layer */
-      pointer-events: none;
+      transform: translateZ(0);
     }
 
-    body.loaded .hero-content > * {
-      opacity: 1 !important;
-      transform: none !important;
-      filter: none !important;
-    }
-
-    /* ========== VISUALLY HIDDEN (SEO) ========== */
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
-
-    /* ========== PARTICLES FIX ========== */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ========== CUSTOM CURSOR (Desktop Only) ========== */
-    @media (min-width: 769px) {
-      * { cursor: none; }
-      a, button { cursor: none !important; }
-
-      .cursor {
-        width: 20px;
-        height: 20px;
-        border: 2px solid var(--neon-primary);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        transition: all 0.15s ease;
-        transform: translate(-50%, -50%);
-        mix-blend-mode: difference;
-      }
-
-      .cursor-follower {
-        width: 8px;
-        height: 8px;
-        background: var(--neon-primary);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        transition: all 0.1s ease;
-        transform: translate(-50%, -50%);
-      }
-
-      .cursor.expand {
-        width: 60px;
-        height: 60px;
-        background: rgba(0, 240, 255, 0.1);
-        border-color: var(--neon-secondary);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .cursor, .cursor-follower { display: none !important; }
-    }
-
-    /* ========== GRAIN & ORBS (Performance Optimized) ========== */
+    /* ========== VISUAL FX (The "Heavy" Stuff) ========== */
+    
+    /* 1. GRAIN OVERLAY */
     .grain-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.4;
+      pointer-events: none; z-index: 1; opacity: 0.4;
     }
 
+    /* 2. FLOATING ORBS */
     .gradient-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px); /* Reduced blur for performance */
-      opacity: 0.3;
-      pointer-events: none;
-      z-index: -1;
-      will-change: transform;
-      transform: translate3d(0,0,0); /* Hardware Acceleration */
+      position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.3;
+      pointer-events: none; z-index: -1; transform: translateZ(0);
       animation: float 20s ease-in-out infinite;
     }
-
     .orb-1 { width: 500px; height: 500px; background: var(--neon-primary); top: -15%; right: -10%; }
     .orb-2 { width: 600px; height: 600px; background: var(--neon-secondary); bottom: -25%; left: -15%; animation-delay: -10s; }
     .orb-3 { width: 400px; height: 400px; background: var(--neon-tertiary); top: 40%; left: 50%; animation-delay: -5s; }
@@ -219,230 +77,178 @@
       50% { transform: translate3d(30px, -50px, 0) scale(1.1); }
     }
 
+    /* 3. CUSTOM CURSOR (Desktop Only) */
+    @media (min-width: 769px) {
+      * { cursor: none; }
+      a, button { cursor: none !important; }
+      .cursor {
+        width: 20px; height: 20px; border: 2px solid var(--neon-primary); border-radius: 50%;
+        position: fixed; pointer-events: none; z-index: 9999;
+        transform: translate(-50%, -50%); mix-blend-mode: difference; transition: all 0.1s ease;
+      }
+      .cursor-follower {
+        width: 8px; height: 8px; background: var(--neon-primary); border-radius: 50%;
+        position: fixed; pointer-events: none; z-index: 9999;
+        transform: translate(-50%, -50%); transition: all 0.2s ease;
+      }
+      .cursor.expand { width: 50px; height: 50px; background: rgba(0, 240, 255, 0.1); border-color: var(--neon-secondary); }
+    }
+    @media (max-width: 768px) { .cursor, .cursor-follower { display: none; } }
+
     /* ========== NAVIGATION ========== */
     nav {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      padding: 1rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      backdrop-filter: blur(10px) saturate(180%);
-      background: rgba(3, 7, 18, 0.8);
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
-      animation: slideDown 0.6s ease forwards 0.1s;
+      position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 1000; backdrop-filter: blur(10px) saturate(180%);
+      background: rgba(3, 7, 18, 0.8); border-bottom: 1px solid var(--border);
+      animation: slideDown 0.8s ease forwards;
     }
-
-    @keyframes slideDown { to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 
     .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--neon-primary);
-      text-decoration: none;
-      letter-spacing: 2px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700;
+      color: var(--neon-primary); text-decoration: none; letter-spacing: 2px;
     }
 
     .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.3s ease;
-    }
-    .nav-links a:hover { color: var(--neon-primary); }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+    .nav-links a:hover { color: var(--neon-primary); text-shadow: 0 0 10px var(--neon-primary); }
 
-    /* === NEW LOGIN BUTTON STYLE === */
+    /* NEON LOGIN BUTTON */
     .nav-btn {
-      padding: 0.5rem 1.5rem;
-      border: 1px solid var(--neon-primary);
-      border-radius: 50px;
-      color: var(--neon-primary) !important;
-      font-weight: 600;
-      letter-spacing: 1px;
-      background: rgba(0, 240, 255, 0.05);
+      padding: 0.6rem 1.8rem; border: 1px solid var(--neon-primary); border-radius: 50px;
+      color: var(--neon-primary) !important; font-weight: 600; letter-spacing: 1px;
+      background: rgba(0, 240, 255, 0.05); text-transform: uppercase; font-size: 0.8rem !important;
       transition: all 0.3s ease;
-      text-transform: uppercase;
-      font-size: 0.8rem !important;
     }
-
     .nav-btn:hover {
-      background: var(--neon-primary);
-      color: #000 !important;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-      transform: translateY(-2px);
+      background: var(--neon-primary); color: #000 !important;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); transform: translateY(-2px);
     }
 
     /* ========== HERO SECTION ========== */
-    .hero {
-      height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-      padding: 0 2rem;
-    }
-
-    .hero-content {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    section { padding: 6rem 0; position: relative; }
+    .hero { height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 2; padding: 0 2rem; }
+    .hero-content { text-align: center; display: flex; flex-direction: column; align-items: center; }
 
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.5rem 1.2rem;
-      background: rgba(0, 240, 255, 0.1);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      font-size: 0.75rem;
-      color: var(--neon-primary);
-      margin-bottom: 1rem;
-      backdrop-filter: blur(10px);
+      display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.2rem;
+      background: rgba(0, 240, 255, 0.1); border: 1px solid var(--border); border-radius: 50px;
+      font-size: 0.75rem; color: var(--neon-primary); margin-bottom: 1rem; backdrop-filter: blur(10px);
     }
 
     h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 5.5vw, 6rem);
-      font-weight: 700;
-      line-height: 1.1;
+      font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5.5vw, 6rem); font-weight: 700;
       background: linear-gradient(135deg, #fff 0%, var(--neon-primary) 50%, var(--neon-secondary) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.8rem;
-      text-shadow: 0 0 80px rgba(0, 240, 255, 0.3);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: 0.8rem; text-shadow: 0 0 80px rgba(0, 240, 255, 0.3);
+      opacity: 0; animation: fadeInUp 1s ease forwards 0.3s; transform: translateY(20px);
     }
 
     .tagline {
-      font-size: clamp(0.9rem, 1.6vw, 1.3rem);
-      color: var(--text-secondary);
-      max-width: 700px;
-      margin: 0 auto 1.5rem;
+      font-size: clamp(0.9rem, 1.6vw, 1.3rem); color: var(--text-secondary); max-width: 700px; margin: 0 auto 1.5rem;
+      opacity: 0; animation: fadeInUp 1s ease forwards 0.5s; transform: translateY(20px);
     }
 
-    .cta-group { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;}
+    .cta-group { display: flex; gap: 1.2rem; justify-content: center; margin-top: 1.5rem; opacity: 0; animation: fadeInUp 1s ease forwards 0.7s; transform: translateY(20px); }
     
     .btn {
-      padding: 0.9rem 2rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      padding: 0.9rem 2rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: 10px;
+      display: inline-flex; align-items: center; gap: 0.5rem; transition: 0.3s;
     }
+    .btn-primary { background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary)); color: #000; }
+    .btn-primary:hover { box-shadow: 0 0 30px rgba(0, 240, 255, 0.4); transform: translateY(-3px); }
+    .btn-secondary { border: 1px solid var(--border); color: var(--text-primary); backdrop-filter: blur(10px); }
+    .btn-secondary:hover { border-color: var(--neon-primary); background: rgba(0, 240, 255, 0.1); }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
-      color: #000;
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      backdrop-filter: blur(10px);
-    }
-
-    .quick-stats {
-      display: flex; gap: 2rem; margin-top: 2rem;
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 0.8rem 1.5rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-    }
-
-    .stat-item .number {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--neon-primary);
-    }
-
+    .quick-stats { display: flex; gap: 2rem; margin-top: 3rem; opacity: 0; animation: fadeInUp 1s ease forwards 0.9s; transform: translateY(20px); }
+    .stat-item { text-align: center; padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; backdrop-filter: blur(10px); }
+    .stat-item .number { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--neon-primary); }
     .stat-item .label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
 
-    /* ========== SECTIONS & GRID ========== */
-    section { padding: 6rem 0; position: relative; }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ========== THE 3x3 PORTAL GRID ========== */
     .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
-
     .section-header { text-align: center; margin-bottom: 4rem; }
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.5rem;
-      color: var(--text-primary);
-    }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; color: var(--text-primary); }
 
-    /* === THE FIXED GRID SYSTEM (3x3) === */
     .portal-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); 
+      grid-template-columns: repeat(3, 1fr); /* 3 Columns = 3x3 Grid */
       gap: 1.5rem;
-      max-width: 900px; 
-      margin: 0 auto; 
+      max-width: 900px; margin: 0 auto;
     }
 
     .portal-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px); 
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: var(--text-primary);
-      transition: transform 0.3s ease;
-      transform: translateZ(0); 
+      position: relative; aspect-ratio: 1; background: var(--card-bg);
+      backdrop-filter: blur(20px); /* Premium Blur */
+      border: 1px solid var(--border); border-radius: 20px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-decoration: none; color: var(--text-primary); overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .portal-card:hover { transform: translateY(-5px); border-color: var(--neon-primary); }
-    .portal-icon { font-size: 2.5rem; }
-    .portal-name { font-size: 0.9rem; font-weight: 600; }
+    /* Spinning Gradient Border Effect */
+    .portal-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 2px;
+      background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity 0.4s ease;
+    }
 
-    /* ========== DIVINE & DEMON SECTIONS ========== */
+    .portal-card:hover { transform: translateY(-10px) scale(1.02); border-color: transparent; }
+    .portal-card:hover::before { opacity: 1; }
+    
+    /* BRAND COLORS ON HOVER */
+    .portal-card[href*="instagram"] { --glow-color: #e4405f; }
+    .portal-card[href*="whatsapp"] { --glow-color: #25d366; }
+    .portal-card[href*="discord"] { --glow-color: #5865f2; }
+    .portal-card[href*="snapchat"] { --glow-color: #fffc00; }
+    .portal-card[href*="steam"] { --glow-color: #1b2838; }
+    .portal-card[href*="riot"] { --glow-color: #d13639; }
+    .portal-card[href*="xbox"] { --glow-color: #107c10; }
+    .portal-card[href*="trading"] { --glow-color: #2962ff; }
+    
+    .portal-card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px color-mix(in srgb, var(--glow-color, var(--neon-primary)) 20%, transparent); }
+
+    .portal-icon { font-size: 2.5rem; z-index: 2; transition: transform 0.3s; }
+    .portal-card:hover .portal-icon { transform: scale(1.2) rotate(5deg); }
+    .portal-name { margin-top: 1rem; font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 600; z-index: 2; }
+
+    .portal-arrow {
+      position: absolute; bottom: 15px; right: 15px; font-size: 0.8rem;
+      color: var(--glow-color, var(--neon-primary)); opacity: 0; transform: translate(-10px, 10px);
+      transition: all 0.3s ease;
+    }
+    .portal-card:hover .portal-arrow { opacity: 1; transform: translate(0,0); }
+
+    /* ========== DIVINE & DEMON ========== */
     .divine-link {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.5rem, 3.5vw, 2.8rem);
-      background: linear-gradient(135deg, #ffd700, #fff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-decoration: none;
-      display: block;
-      text-align: center;
-      margin: 4rem 0;
-      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+      display: block; text-align: center; margin: 4rem 0;
+      font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+      background: linear-gradient(135deg, #ffd700, #fff); -webkit-background-clip: text; color: transparent;
+      text-decoration: none; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+      transition: transform 0.3s;
     }
+    .divine-link:hover { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)); }
 
     .demon-section { padding: 8rem 0; text-align: center; }
     .demon-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(1.5rem, 5vw, 4rem);
-      font-weight: 900;
+      font-family: 'Orbitron', sans-serif; font-size: clamp(1.5rem, 5vw, 4rem); font-weight: 900;
       background: linear-gradient(90deg, #ff006e, #ffbe0b, #00f0ff);
-      -webkit-background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; color: transparent;
+      animation: gradientShift 3s infinite linear;
     }
+    @keyframes gradientShift { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
 
     /* ========== FOOTER ========== */
     footer { padding: 4rem 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); }
     .social-links { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
-    .social-icon { font-size: 1.5rem; text-decoration: none; }
+    .social-icon { font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+    .social-icon:hover { transform: translateY(-5px); color: var(--neon-primary); }
 
     /* ========== MOBILE RESPONSIVE ========== */
     @media (max-width: 768px) {
@@ -451,30 +257,27 @@
       .hero { padding: 0 1rem; }
       .quick-stats { flex-wrap: wrap; justify-content: center; gap: 1rem; }
       
-      .portal-grid { 
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 0.8rem; 
-      }
-      
+      /* Mobile Grid: 3 columns still, but tighter gap */
+      .portal-grid { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
       .portal-card { padding: 1rem; }
       .portal-icon { font-size: 1.8rem; }
       .portal-name { font-size: 0.7rem; }
+      .portal-arrow { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="visually-hidden">
-    <h1>Bhavishya Parjapati - Official Portfolio</h1>
-    <p>Bhavishya Parjapati is a Digital Architect and Cyber Entity based in India. Official links to Instagram, Discord, Steam.</p>
-  </div>
 
   <div class="cursor"></div>
   <div class="cursor-follower"></div>
+
   <div class="grain-overlay"></div>
+
   <div class="gradient-orb orb-1"></div>
   <div class="gradient-orb orb-2"></div>
   <div class="gradient-orb orb-3"></div>
-  <div id="particles-js"></div>
+
+  <div id="particles-js" style="position:fixed; inset:0; z-index:0; pointer-events:none;"></div>
 
   <nav>
     <a href="/" class="logo">BP</a>
@@ -486,63 +289,75 @@
     </ul>
   </nav>
 
-  <main>
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <div class="hero-badge"><span>●</span> LIVE NOW</div>
-        
-        <h1 id="secret-trigger" data-text="BHAVISHYA PARJAPATI">BHAVISHYA PARJAPATI</h1>
-        
-        <p class="tagline">Digital Architect • Cyber Entity • Beyond Reality</p>
-        
-        <div class="cta-group">
-          <a href="#contact" class="btn btn-primary">Connect Now →</a>
-          <a href="#about" class="btn btn-secondary">Learn More</a>
-        </div>
-
-        <div class="quick-stats">
-          <div class="stat-item"><div class="number">12+</div><div class="label">Platforms</div></div>
-          <div class="stat-item"><div class="number">∞</div><div class="label">Possibilities</div></div>
-          <div class="stat-item"><div class="number">24/7</div><div class="label">Online</div></div>
-        </div>
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><span>●</span> LIVE NOW</div>
+      <h1 id="secret-trigger">BHAVISHYA PARJAPATI</h1>
+      <p class="tagline">Digital Architect • Cyber Entity • Beyond Reality</p>
+      
+      <div class="cta-group">
+        <a href="#contact" class="btn btn-primary">Connect Now →</a>
+        <a href="#about" class="btn btn-secondary">Learn More</a>
       </div>
-    </section>
 
-    <section id="contact">
-      <div class="container">
-        <header class="section-header">
-          <h2 class="section-title">Connect Across Dimensions</h2>
-          <p style="color:var(--text-muted)">Choose your portal</p>
-        </header>
-
-        <div class="portal-grid">
-          <a href="email.html" class="portal-card"><div class="portal-icon">📧</div><div class="portal-name">Email</div></a>
-          <a href="whatsapp.html" class="portal-card"><div class="portal-icon">💬</div><div class="portal-name">WhatsApp</div></a>
-          <a href="instagram.html" class="portal-card"><div class="portal-icon">📸</div><div class="portal-name">Instagram</div></a>
-          <a href="discord.html" class="portal-card"><div class="portal-icon">🎧</div><div class="portal-name">Discord</div></a>
-          <a href="snapchat.html" class="portal-card"><div class="portal-icon">👻</div><div class="portal-name">Snapchat</div></a>
-          <a href="steam.html" class="portal-card"><div class="portal-icon">🎮</div><div class="portal-name">Steam</div></a>
-          <a href="riot.html" class="portal-card"><div class="portal-icon">⚔️</div><div class="portal-name">Riot</div></a>
-          <a href="xbox.html" class="portal-card"><div class="portal-icon">🎯</div><div class="portal-name">Xbox</div></a>
-          <a href="tradingview.html" class="portal-card"><div class="portal-icon">📈</div><div class="portal-name">Trading</div></a>
-        </div>
-
-        <div style="text-align:center;">
-          <a href="about-identity.html" class="divine-link">Know More About This Identity</a>
-        </div>
+      <div class="quick-stats">
+        <div class="stat-item"><div class="number">12+</div><div class="label">Platforms</div></div>
+        <div class="stat-item"><div class="number">∞</div><div class="label">Possibilities</div></div>
+        <div class="stat-item"><div class="number">24/7</div><div class="label">Online</div></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="demon-section" id="about">
-      <div class="container">
-        <h2 class="demon-text">!YES I AM THE DEMON YOU ARE FINDING</h2>
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Connect Across Dimensions</h2>
+        <p style="color:var(--text-muted)">Choose your portal</p>
       </div>
-    </section>
-  </main>
+
+      <div class="portal-grid">
+        <a href="email.html" class="portal-card">
+          <div class="portal-icon">📧</div><div class="portal-name">Email</div><div class="portal-arrow">➔</div>
+        </a>
+        <a href="whatsapp.html" class="portal-card">
+          <div class="portal-icon">💬</div><div class="portal-name">WhatsApp</div><div class="portal-arrow">➔</div>
+        </a>
+        <a href="instagram.html" class="portal-card">
+          <div class="portal-icon">📸</div><div class="portal-name">Instagram</div><div class="portal-arrow">➔</div>
+        </a>
+        <a href="discord.html" class="portal-card">
+          <div class="portal-icon">🎧</div><div class="portal-name">Discord</div><div class="portal-arrow">➔</div>
+        </a>
+        <a href="snapchat.html" class="portal-card">
+          <div class="portal-icon">👻</div><div class="portal-name">Snapchat</div><div class="portal-arrow">➔</div>
+        </a>
+        <a href="steam.html" class="portal-card">
+          <div class="portal-icon">🎮</div><div class="portal-name">Steam</div><div class="portal-arrow">➔</div>
+        </a>
+        <a href="riot.html" class="portal-card">
+          <div class="portal-icon">⚔️</div><div class="portal-name">Riot</div><div class="portal-arrow">➔</div>
+        </a>
+        <a href="xbox.html" class="portal-card">
+          <div class="portal-icon">🎯</div><div class="portal-name">Xbox</div><div class="portal-arrow">➔</div>
+        </a>
+        <a href="tradingview.html" class="portal-card">
+          <div class="portal-icon">📈</div><div class="portal-name">Trading</div><div class="portal-arrow">➔</div>
+        </a>
+      </div>
+
+      <a href="about-identity.html" class="divine-link">Know More About This Identity</a>
+    </div>
+  </section>
+
+  <section class="demon-section" id="about">
+    <div class="container">
+      <h2 class="demon-text">!YES I AM THE DEMON YOU ARE FINDING</h2>
+    </div>
+  </section>
 
   <footer>
     <div class="container">
-      <p>© <span id="year"></span> <strong>Bhavishya Parjapati</strong> • Official Website</p>
+      <p>© <span id="year"></span> Bhavishya Parjapati • Official Website</p>
       <div class="social-links">
         <a href="instagram.html" class="social-icon">📸</a>
         <a href="email.html" class="social-icon">📧</a>
@@ -551,35 +366,34 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  
   <script>
-    // 1. Update Year
+    // 1. Year Update
     document.getElementById('year').textContent = new Date().getFullYear();
-    document.body.classList.add('loaded');
 
-    // 2. Custom Cursor (Desktop Only)
+    // 2. Custom Cursor Logic (Restored)
     if (window.innerWidth > 768) {
       const cursor = document.querySelector('.cursor');
       const follower = document.querySelector('.cursor-follower');
-      
       let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0, followerX = 0, followerY = 0;
 
       document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
 
-      function animate() {
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
-        followerX += (mouseX - followerX) * 0.1;
-        followerY += (mouseY - followerY) * 0.1;
-        
+      function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.2; cursorY += (mouseY - cursorY) * 0.2;
+        followerX += (mouseX - followerX) * 0.1; followerY += (mouseY - followerY) * 0.1;
         cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px';
         follower.style.left = followerX + 'px'; follower.style.top = followerY + 'px';
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateCursor);
       }
-      animate();
+      animateCursor();
+
+      document.querySelectorAll('a, button, .portal-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+      });
     }
 
-    // 3. Particles Configuration
+    // 3. Particles Config
     if (typeof particlesJS !== 'undefined') {
       particlesJS("particles-js", {
         "particles": {
@@ -590,26 +404,18 @@
           "line_linked": { "enable": true, "distance": 150, "color": "#00f0ff", "opacity": 0.1 },
           "move": { "enable": true, "speed": 1 }
         },
-        "interactivity": {
-          "detect_on": "canvas",
-          "events": { "onhover": { "enable": true, "mode": "grab" } }
-        }
+        "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" } } }
       });
     }
 
-    // 4. Secret Login Trigger (Shift + Click on Name)
+    // 4. Secret Login Trigger (Shift+Click)
     const trigger = document.getElementById('secret-trigger');
     let shiftPressed = false;
-    
     window.addEventListener('keydown', (e) => { if (e.key === 'Shift') shiftPressed = true; });
     window.addEventListener('keyup', (e) => { if (e.key === 'Shift') shiftPressed = false; });
-    
     if(trigger) {
       trigger.addEventListener('click', (e) => {
-        if (shiftPressed) {
-          e.preventDefault();
-          window.location.href = "login.html"; // Go to your secure login page
-        }
+        if (shiftPressed) { e.preventDefault(); window.location.href = "login.html"; }
       });
     }
 
@@ -622,12 +428,9 @@
         }
       });
     });
-
     document.querySelectorAll('.portal-card, .section-header').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'all 0.6s ease';
-      observer.observe(el);
+      el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease'; observer.observe(el);
     });
   </script>
 </body>
