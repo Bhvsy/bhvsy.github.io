@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EMPEROR CONSOLE | SQUADRON COMMS</title>
+  <title>EMPEROR CONSOLE | GOD MODE</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
@@ -16,6 +16,7 @@
       --hacker-dark: #001100;
       --alert-red: #ff3333;
       --cyan: #0ff;
+      --gold: #ffd700;
       --msg-bg: rgba(0, 20, 0, 0.5);
     }
 
@@ -50,7 +51,7 @@
     h1 { font-family: 'Orbitron', sans-serif; letter-spacing: 3px; text-shadow: 0 0 10px var(--hacker-green); margin: 0; font-size: 1.5rem; }
 
     .dashboard {
-      display: grid; grid-template-columns: 400px 1fr 300px; /* Wider Left Panel for Chat */
+      display: grid; grid-template-columns: 400px 1fr 300px;
       gap: 1rem; padding: 1rem; height: 100%; overflow: hidden;
     }
 
@@ -65,17 +66,33 @@
       font-weight: bold; margin-bottom: 0.5rem; display: inline-block; width: fit-content;
     }
 
-    /* ========== CHAT ROOM STYLES (NEW) ========== */
+    /* ========== CHAT ROOM (GOD MODE STYLES) ========== */
     #chatWindow {
       flex-grow: 1; overflow-y: auto; font-size: 0.9rem; 
       border-bottom: 1px solid #333; margin-bottom: 10px; padding-right: 5px;
       display: flex; flex-direction: column; gap: 8px;
     }
     
-    .chat-msg { padding: 5px; border-left: 2px solid var(--hacker-green); background: var(--msg-bg); word-wrap: break-word; }
+    .chat-msg { 
+      padding: 5px; border-left: 2px solid var(--hacker-green); 
+      background: var(--msg-bg); word-wrap: break-word; position: relative;
+    }
+    .chat-msg:hover .delete-btn { display: inline-block; } /* Show delete on hover */
+
     .chat-user { color: var(--cyan); font-weight: bold; font-size: 0.8rem; }
+    .chat-user.admin { color: var(--gold); text-shadow: 0 0 5px var(--gold); } /* GOLD NAME */
+    
     .chat-text { color: #fff; }
+    .chat-text.system { color: var(--alert-red); font-weight: bold; text-transform: uppercase; } /* SYSTEM MSG */
+    
     .chat-time { float: right; font-size: 0.7rem; color: #666; }
+
+    /* DELETE BUTTON */
+    .delete-btn {
+      float: right; color: var(--alert-red); cursor: pointer; margin-left: 10px;
+      font-weight: bold; display: none; /* Hidden by default */
+    }
+    .delete-btn:hover { background: var(--alert-red); color: #000; }
     
     .chat-input-area { display: flex; gap: 10px; }
     #chatInput {
@@ -86,7 +103,17 @@
       background: var(--hacker-green); color: #000; border: none; padding: 0 15px;
       font-weight: bold; cursor: pointer; font-family: 'Orbitron';
     }
-    #sendBtn:hover { background: #fff; }
+
+    /* ADMIN CONTROLS */
+    #adminPanel {
+      margin-bottom: 10px; display: none; /* Hidden for non-admins */
+      border: 1px solid var(--alert-red); padding: 5px; background: rgba(50, 0, 0, 0.3);
+    }
+    .admin-btn {
+      background: transparent; border: 1px solid var(--alert-red); color: var(--alert-red);
+      font-size: 0.7rem; padding: 2px 8px; cursor: pointer; margin-right: 5px;
+    }
+    .admin-btn:hover { background: var(--alert-red); color: #000; }
 
     /* ========== CENTER LINKS ========== */
     .link-grid {
@@ -114,7 +141,7 @@
 
     /* MOBILE */
     @media (max-width: 900px) {
-      .dashboard { grid-template-columns: 1fr; grid-template-rows: 400px 1fr auto; }
+      .dashboard { grid-template-columns: 1fr; grid-template-rows: 500px 1fr auto; }
     }
   </style>
 </head>
@@ -135,6 +162,12 @@
       <div class="panel">
         <div class="panel-title">SQUADRON_COMMS</div>
         
+        <div id="adminPanel">
+          <span style="color:var(--alert-red); font-weight:bold; font-size:0.8rem;">[ADMIN TOOLS]</span>
+          <button class="admin-btn" id="nukeBtn">NUKE CHAT</button>
+          <button class="admin-btn" id="sysMsgBtn">BROADCAST ALERT</button>
+        </div>
+
         <div id="chatWindow">
           <div style="text-align:center; color:#666; margin-top:50px;">Creating Secure Channel...</div>
         </div>
@@ -166,7 +199,7 @@
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
     import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-    import { getFirestore, collection, getDocs, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, serverTimestamp, writeBatch } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
     // 1. FIREBASE CONFIG
     const firebaseConfig = {
@@ -183,16 +216,29 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    // ==========================================
+    // ⚠️ SET YOUR ADMIN EMAIL HERE ⚠️
+    // ==========================================
+    const ADMIN_EMAIL = "bhavishyaprajapati200@gmail.com"; // <--- CHANGE THIS TO YOUR EXACT EMAIL
+    // ==========================================
+
     let userEmail = "Unknown";
+    let isAdmin = false;
 
     // 2. AUTH & INIT
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        userEmail = user.email.split('@')[0]; // Use name before @
-        document.getElementById('currentUser').innerText = userEmail.toUpperCase();
+        userEmail = user.email;
+        isAdmin = (user.email === ADMIN_EMAIL); // Check if YOU are the user
         
-        loadSecureLinks(); // Load Links
-        initChat(); // Start Chat Listener
+        document.getElementById('currentUser').innerText = userEmail.toUpperCase();
+        if(isAdmin) document.getElementById('currentUser').style.color = "var(--gold)";
+
+        // Show Admin Panel if it's you
+        if (isAdmin) document.getElementById('adminPanel').style.display = 'block';
+
+        loadSecureLinks(); 
+        initChat(); 
         startMatrixBg();
         startTrafficGraph();
         startVitals();
@@ -201,41 +247,64 @@
       }
     });
 
-    // 3. CHAT SYSTEM (REAL-TIME)
+    // 3. CHAT SYSTEM (GOD MODE)
     const chatWindow = document.getElementById('chatWindow');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
 
     function initChat() {
-      // Listen for new messages
       const q = query(collection(db, "globalChat"), orderBy("timestamp"));
       
       onSnapshot(q, (snapshot) => {
-        chatWindow.innerHTML = ''; // Clear current view
-        snapshot.forEach((doc) => {
-          const msg = doc.data();
-          renderMessage(msg);
+        chatWindow.innerHTML = ''; 
+        snapshot.forEach((docSnap) => {
+          renderMessage(docSnap.id, docSnap.data());
         });
-        chatWindow.scrollTop = chatWindow.scrollHeight; // Auto scroll down
+        chatWindow.scrollTop = chatWindow.scrollHeight;
       });
     }
 
-    function renderMessage(msg) {
+    function renderMessage(docId, msg) {
       const div = document.createElement('div');
       div.className = 'chat-msg';
-      // Convert timestamp to time string
       const time = msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '...';
       
+      // Admin Styling for Usernames
+      let userClass = "chat-user";
+      if(msg.isAdmin) userClass += " admin";
+
+      // System Message Styling
+      let textClass = "chat-text";
+      if(msg.type === "system") {
+        textClass += " system";
+        msg.user = "SYSTEM ALERT"; // Override name
+      }
+
+      // DELETE BUTTON (Only visible to Admin)
+      let deleteHtml = "";
+      if(isAdmin) {
+        deleteHtml = `<span class="delete-btn" onclick="window.deleteMessage('${docId}')">[X]</span>`;
+      }
+
       div.innerHTML = `
-        <span class="chat-user">[${msg.user}]</span>
+        <span class="${userClass}">[${msg.user.split('@')[0]}]</span>
         <span class="chat-time">${time}</span>
-        <div class="chat-text">${msg.text}</div>
+        ${deleteHtml}
+        <div class="${textClass}">${msg.text}</div>
       `;
       chatWindow.appendChild(div);
     }
 
-    // Send Message Logic
-    async function sendMessage() {
+    // MAKE DELETE FUNCTION GLOBAL
+    window.deleteMessage = async (docId) => {
+      if(!confirm("DELETE THIS MESSAGE PERMANENTLY?")) return;
+      try {
+        await deleteDoc(doc(db, "globalChat", docId));
+      } catch(e) { alert("Error: " + e.message); }
+    };
+
+    // SEND LOGIC
+    async function sendMessage(type="normal") {
       const text = chatInput.value.trim();
       if (!text) return;
 
@@ -243,21 +312,51 @@
         await addDoc(collection(db, "globalChat"), {
           text: text,
           user: userEmail,
+          isAdmin: isAdmin,
+          type: type,
           timestamp: serverTimestamp()
         });
-        chatInput.value = ''; // Clear input
-      } catch (e) {
-        console.error("Error sending message: ", e);
-        alert("Transmission Failed. Check Console.");
-      }
+        chatInput.value = ''; 
+      } catch (e) { console.error(e); }
     }
 
-    sendBtn.addEventListener('click', sendMessage);
+    sendBtn.addEventListener('click', () => sendMessage("normal"));
     chatInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') sendMessage();
+      if (e.key === 'Enter') sendMessage("normal");
     });
 
-    // 4. LOAD LINKS (From previous step)
+    // 4. ADMIN TOOLS
+    document.getElementById('nukeBtn').addEventListener('click', async () => {
+      if(!confirm("WARNING: THIS WILL DELETE ALL MESSAGES FOR EVERYONE. PROCEED?")) return;
+      
+      const q = query(collection(db, "globalChat"));
+      const snapshot = await getDocs(q);
+      const batch = writeBatch(db);
+      
+      snapshot.forEach((doc) => {
+        batch.delete(doc.ref);
+      });
+      
+      await batch.commit();
+      
+      // Post system message
+      await addDoc(collection(db, "globalChat"), {
+        text: "CHAT LOGS PURGED BY ADMINISTRATOR.",
+        user: "SYSTEM",
+        type: "system",
+        isAdmin: true,
+        timestamp: serverTimestamp()
+      });
+    });
+
+    document.getElementById('sysMsgBtn').addEventListener('click', () => {
+      chatInput.value = "[ALERT] ";
+      chatInput.focus();
+      // Logic handles type in sendMessage, manual prefix for visual
+    });
+
+
+    // 5. LOAD LINKS
     async function loadSecureLinks() {
       const container = document.getElementById('linksContainer');
       try {
@@ -276,7 +375,7 @@
       } catch (err) { console.log(err); }
     }
 
-    // 5. VISUALS
+    // 6. VISUALS
     function startMatrixBg() {
       const canvas = document.getElementById('bgCanvas');
       const ctx = canvas.getContext('2d');
