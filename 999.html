@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEVEL 999 | CLASSIFIED VAULT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body { background: #050505; color: #f00; font-family: 'Share Tech Mono', monospace; padding: 20px; text-align: center; }
+    
+    /* HEADER */
+    h1 { font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 5px; text-shadow: 0 0 10px #f00; }
+    .warning { color: #500; font-size: 0.8rem; margin-bottom: 30px; border-bottom: 1px solid #300; display: inline-block; padding-bottom: 5px; }
+
+    /* UPLOAD BOX */
+    .upload-zone { border: 2px dashed #f00; padding: 20px; margin: 0 auto 30px; max-width: 500px; background: rgba(20,0,0,0.5); }
+    input[type="file"] { color: #fff; margin-bottom: 15px; }
+    
+    button {
+      background: #f00; color: #000; border: none; padding: 10px 20px; 
+      font-family: 'Orbitron'; font-weight: bold; cursor: pointer; text-transform: uppercase;
+    }
+    button:hover { background: #fff; box-shadow: 0 0 15px #f00; }
+
+    /* PROGRESS BAR */
+    #progressContainer { width: 100%; max-width: 500px; height: 10px; background: #300; margin: 10px auto; display: none; }
+    #progressBar { height: 100%; width: 0%; background: #f00; transition: width 0.2s; }
+
+    /* VIDEO GRID */
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+    .video-card { border: 1px solid #333; padding: 10px; background: #111; }
+    video { width: 100%; border: 1px solid #333; }
+    .vid-title { color: #888; font-size: 0.8rem; margin-top: 5px; word-break: break-all; }
+
+    .back-btn { position: fixed; top: 20px; left: 20px; color: #f00; text-decoration: none; border: 1px solid #f00; padding: 5px 10px; }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-btn">← BACK TO OS</a>
+
+  <h1>VAULT 999</h1>
+  <div class="warning">TOP SECRET // EYES ONLY</div>
+
+  <div class="upload-zone">
+    <input type="file" id="fileInput" accept="video/*,image/*">
+    <br>
+    <button onclick="uploadFile()">UPLOAD TO CLOUD</button>
+    <div id="progressContainer"><div id="progressBar"></div></div>
+    <div id="statusMsg" style="margin-top:10px;"></div>
+  </div>
+
+  <div class="video-grid" id="gallery">
+    </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+    import { getStorage, ref, uploadBytesResumable, getDownloadURL, listAll } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA2W2IcHrs0WasQuBk2h4nqui3z7_P6OmU",
+      authDomain: "bhavishya-auth.firebaseapp.com",
+      projectId: "bhavishya-auth",
+      storageBucket: "bhavishya-auth.firebasestorage.app", // Auto-detected usually, but ensure this matches your console
+      messagingSenderId: "286150672573",
+      appId: "1:286150672573:web:09bddc533e74c0c356f7d4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const storage = getStorage(app);
+
+    // 1. SECURITY CHECK (The Bouncer)
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // Not logged in? Get out.
+        window.location.href = "index.html"; 
+      } else {
+        console.log("Welcome Agent " + user.email);
+        loadVideos(); // Load content only if allowed
+      }
+    });
+
+    // 2. UPLOAD LOGIC
+    window.uploadFile = () => {
+      const file = document.getElementById('fileInput').files[0];
+      if (!file) return alert("SELECT A FILE FIRST");
+
+      // Create a reference (Folder Name / File Name)
+      const storageRef = ref(storage, 'secret_vault/' + file.name);
+      
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      
+      document.getElementById('progressContainer').style.display = 'block';
+
+      uploadTask.on('state_changed', 
+        (snapshot) => {
+          // Progress Bar Logic
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          document.getElementById('progressBar').style.width = progress + '%';
+        }, 
+        (error) => {
+          alert("Upload Failed: " + error.message);
+        }, 
+        () => {
+          // Complete
+          document.getElementById('statusMsg').innerText = "UPLOAD COMPLETE";
+          setTimeout(() => location.reload(), 1000); // Refresh to see video
+        }
+      );
+    };
+
+    // 3. LOAD VIDEOS
+    function loadVideos() {
+      const listRef = ref(storage, 'secret_vault/');
+      const gallery = document.getElementById('gallery');
+
+      listAll(listRef).then((res) => {
+        res.items.forEach((itemRef) => {
+          getDownloadURL(itemRef).then((url) => {
+            // Create Video Card
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            
+            // Check if it's a video or image based on name (simple check)
+            let media = "";
+            if(itemRef.name.match(/\.(mp4|webm|mov)$/i)) {
+               media = `<video controls src="${url}"></video>`;
+            } else {
+               media = `<img src="${url}" style="width:100%">`;
+            }
+
+            card.innerHTML = `${media}<div class="vid-title">${itemRef.name}</div>`;
+            gallery.appendChild(card);
+          });
+        });
+      }).catch((error) => {
+        // If folder doesn't exist yet, that's fine
+        console.log("Vault empty or restricted");
+      });
+    }
+  </script>
+</body>
+</html>
