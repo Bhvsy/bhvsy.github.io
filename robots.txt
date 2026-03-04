@@ -1,39 +1,22 @@
 # ==========================================
-# Robots.txt for Bhavishya Parjapati Website
+# Robots.txt for Bhvsy OS
 # https://bhvsy.github.io/
 # ==========================================
 
-# Allow all search engines to crawl everything
 User-agent: *
 Allow: /
+
+# 🛑 SECURITY: Block private AI OS files from Google
+Disallow: /login.html
+Disallow: /protected.html
+Disallow: /999.html
+
+# 🛑 SECURITY: Block the Future OS secondary repository 
+# (Replace "future-os" with the actual name of your second repo)
+Disallow: /future-os/ 
 
 # Sitemap location (IMPORTANT for SEO)
 Sitemap: https://bhvsy.github.io/sitemap.xml
 
-# Block the login page from being indexed
-Disallow: /login.html
-
-# Optional: Crawl delay (1 second between requests)
+# Crawl delay (Respected by Bing)
 Crawl-delay: 1
-
-# ==========================================
-# Specific bot instructions
-# ==========================================
-
-# Google
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 1
-
-# Bing
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-# Google Images
-User-agent: Googlebot-Image
-Allow: /
-
-# Google AdSense (if you use it later)
-User-agent: Mediapartners-Google
-Allow: /
