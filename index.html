@@ -326,6 +326,19 @@
         .project-name{font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;transition:color .3s ease}
         .project-card:hover .project-name{color:var(--accent-cyan)}
 
+        /* RakshaNet additions */
+        .launch-card + .launch-card{margin-top:24px}
+        .launch-card--raksha{border-color:rgba(0,240,255,.22);background:linear-gradient(135deg,rgba(0,240,255,.06),rgba(16,185,129,.05))}
+        .launch-actions{display:flex;flex-wrap:wrap;gap:8px 24px}
+        .launch-link--alt{color:var(--accent-green)}
+        .project-card--wide{grid-column:1/-1;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:18px;text-align:left}
+        .project-card--wide .project-icon{margin-bottom:0}
+        .project-sub{font-size:.7rem;color:var(--text-secondary);margin-top:3px;letter-spacing:.2px}
+        @media(max-width:768px){
+            .launch-actions{justify-content:center}
+            .project-card--wide{padding:18px 16px}
+        }
+
         /* DEMON SECTION */
         .demon{padding:100px 24px;text-align:center;position:relative}
         .demon::before{content:'';position:absolute;top:50%;left:50%;width:50%;max-width:500px;aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,0,110,.05) 0%,transparent 70%);pointer-events:none;animation:demonPulse 4s ease-in-out infinite}
@@ -630,9 +643,28 @@
             </div>
         </section>
 
-        <!-- NEWS GUARD LAUNCH -->
+        <!-- RAKSHANET + NEWS GUARD LAUNCHES -->
         <section class="launch">
             <div class="container">
+                <div class="launch-card launch-card--raksha reveal">
+                    <div class="launch-icon">📱</div>
+                    <div class="launch-content">
+                        <div class="launch-badge"><span class="launch-badge-dot"></span>New · Haryana Ideathon 2026</div>
+                        <h3 class="launch-title"><a href="https://bhvsy.github.io/RakshaNet/">RakshaNet — AI Cyber Fraud Shield for Android</a></h3>
+                        <p class="launch-desc">A native Android app that checks suspicious links, UPI IDs, messages and fake government portals with Gemini AI, and explains the danger in English, Hindi and Haryanvi. Includes a safe-payment cooling timer, family guardian alerts, the Bhvsy AI chat companion and a 1930 golden-hour emergency guide.</p>
+                        <div class="launch-actions">
+                            <a href="https://bhvsy.github.io/RakshaNet/" class="launch-link">
+                                Explore RakshaNet
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                            <a href="https://bhvsy.github.io/RakshaNet/#download" class="launch-link launch-link--alt">
+                                Download APK
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 11 12 16 17 11"/><line x1="5" y1="21" x2="19" y2="21"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="launch-card reveal">
                     <div class="launch-icon">🛡️</div>
                     <div class="launch-content">
@@ -657,6 +689,7 @@
                     <p class="section-subtitle">Tools, systems, and portals — engineered from the ground up.</p>
                 </header>
                 <div class="projects-grid">
+                    <a href="https://bhvsy.github.io/RakshaNet/" class="project-card project-card--wide reveal"><div class="project-icon">📱</div><div class="project-card-text"><div class="project-name">RakshaNet</div><div class="project-sub">AI cyber fraud shield · Android app</div></div></a>
                     <a href="https://bhvsy.github.io/NewsGuard" class="project-card reveal reveal-delay-1"><div class="project-icon">🛡️</div><div class="project-name">News Guard</div></a>
                     <a href="https://bhvsy.github.io/my-setup/" class="project-card reveal reveal-delay-1"><div class="project-icon">🖥️</div><div class="project-name">My Setup</div></a>
                     <a href="https://bhvsy.github.io/trading-terminal/" class="project-card reveal reveal-delay-2"><div class="project-icon">📊</div><div class="project-name">Trading</div></a>
@@ -687,7 +720,7 @@
 
     <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">
         <h2>About Bhavishya Parjapati</h2>
-        <p>Bhavishya Parjapati (Bhavishya Prajapati) is India's Digital Architect, a master trader, founder and owner of Bhvsy OS. A tool builder for traders who created News Guard — a great tool for traders and news trade optimizer. Contact: bhavishyaparjapatii@gmail.com.</p>
+        <p>Bhavishya Parjapati (Bhavishya Prajapati) is India's Digital Architect, a master trader, founder and owner of Bhvsy OS. A tool builder for traders who created News Guard — a great tool for traders and news trade optimizer — and RakshaNet, an AI cyber fraud shield Android app for the Government of Haryana Ideathon 2026. Contact: bhavishyaparjapatii@gmail.com.</p>
     </div>
 
     <script>
